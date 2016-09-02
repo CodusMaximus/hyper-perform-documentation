@@ -18,7 +18,7 @@
 
 
 \title{Hyper Perform\\ Functional Requirements Specification}
-\subtitle{ Repository: \url{https://github.com/claudioMDS/hyper-perform}}
+\subtitle{ Organisation: \url{https://github.com/Hyperperform}}
 \begin{figure}
 			\centering
 			\includegraphics[height=200px]{../Images/CodusMaximus_logo.jpg}
@@ -52,11 +52,11 @@ The vision of this project is to create an automated performance management syst
 \subsection{Objectives}
 The objectives for the Hyper Perform system are:
 \begin{itemize}
-	\item To source information from various forms of software systems and transform it into usable data to determine performance.
-	\item To generate real-time reports on staff members in order to evaluate performance based on this data.
+	\item To source information from various integrations and treat them as events to determine performance.
+	\item To generate real-time reports on staff members in order to evaluate performance based on these events.
 	\item To monitor staff members in order to determine possible causes of work detriment.
 	\item To add a form of gamification to encourage productivity, and discourage slacking and other bad behaviours.
-
+	\item To make the system easily expandable to various other sub-systems.
 \end{itemize}
 
 
@@ -74,13 +74,12 @@ The objectives for the Hyper Perform system are:
 
 The scope of the user management module includes:
 \begin{itemize}
-	\item Super user control over administrator rights given to individuals.
+	\item Super user control over administrator rights given to individuals and only one super user can exist at any moment.
 	\item Administrators may add employees and manage their details.
 	\item Administrators may add employee roles to employees registered, which will define which algorithms and systems will influence their performance ratings.
-	\item A user may change their dashboard to reflect what the wish to see.
 	\item A user should be able to view all their personal details, and request change immediately if something is wrong. 
 \end{itemize}
-Note, it is assumed that a super user is not in anyway an employee within the system. It is also assumed that an Administrator is automatically an employee of the system. Administrators may not review themselves or change their own details, such action must be authorised by another administrator.
+Note, it is assumed that a super user is not in anyway an employee within the system. It is also assumed that an Administrator is automatically an employee of the system. Administrators may not review themselves however they may change their own details.
 
 \subsection{Domain Model}
 \begin{figure}[H]
@@ -102,8 +101,8 @@ Note, it is assumed that a super user is not in anyway an employee within the sy
 \end{figure}
 The scope of the integration module includes:
 \begin{itemize}
-	\item Events are received through a REST URL that is made available to the services. There is no need for polling these systems.
-	\item Each event is converted to a Java object and is persisted. Along with being persisted each event object is also placed onto a message queue where Esper will act as the consumer on the other end.
+	\item Events are received through RESTful services that are made available to event emitting system. There is no need for polling these systems.
+	\item Each event is mapped to a JAVA POJO and is persisted. Along with being persisted each event object is also placed onto a message queue where a CEP Engine will act as the consumer on the other end.
 	\item Algorithms are applied to the persisted data to generate reports.
 \end{itemize}
 
@@ -127,8 +126,8 @@ The scope of the integration module includes:
 \end{figure}
 The scope of the algorithms module includes:
 \begin{itemize}
-	\item Determining which algorithm "recipe" will be appropriate in the current circumstance.
-	\item Applying said "recipe" to the data provided, and then updating the employee in question's performance score accordingly.
+	\item Determining which statistical algorithm will be appropriate in the current circumstances.
+	\item Applying this algorithm to the data provided, and then updating employee performance scores accordingly.
 \end{itemize}
 
 \subsection{Domain Model}
@@ -152,7 +151,6 @@ The scope of the algorithms module includes:
 The scope of the reporting module includes:
 \begin{itemize}
 	\item Administrators such as HR may request reports on individual employee's performance.
-	\item Administrators may also request reports on the current project performance, as well as an end of year final report.
 	\item All users, including administrators whom are users, may view their own dashboard which contains information regarding their current performance and personal details.
 \end{itemize}
 
@@ -166,28 +164,28 @@ The scope of the reporting module includes:
 
 \pagebreak
 
-\section{Notifications}
-\subsection{Scope}
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[scale=0.6]{../Images/Notifications_Scope.jpg}
-		\caption{Notifications Scope}
-	\end{center}
-\end{figure}
-The scope of the notifications module includes:
-\begin{itemize}
-	\item Sending a notification about a rapid decline in performance.
-	\item Send a notification about a report that an employee requests.
-	\item Push notifications are sent to the Android device to notify of important events or required surveys.
-\end{itemize}
-
-\subsection{Domain Model}
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[scale=0.55]{../Images/Notifications_Domain.jpg}
-		\caption{Notifications Domain Model}
-	\end{center}
-\end{figure}
+%\section{Notifications}
+%\subsection{Scope}
+%\begin{figure}[H]
+%	\begin{center}
+%		\includegraphics[scale=0.6]{../Images/Notifications_Scope.jpg}
+%		\caption{Notifications Scope}
+%	\end{center}
+%\end{figure}
+%The scope of the notifications module includes:
+%\begin{itemize}
+%	\item Sending a notification about a rapid decline in performance.
+%	\item Send a notification about a report that an employee requests.
+%	\item Push notifications are sent to the Android device to notify of important events or required surveys.
+%\end{itemize}
+%
+%\subsection{Domain Model}
+%\begin{figure}[H]
+%	\begin{center}
+%		\includegraphics[scale=0.55]{../Images/Notifications_Domain.jpg}
+%		\caption{Notifications Domain Model}
+%	\end{center}
+%\end{figure}
 
 
 
