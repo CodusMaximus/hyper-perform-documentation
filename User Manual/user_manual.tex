@@ -43,69 +43,93 @@
 \tableofcontents
 \pagebreak
 
-\section{Introduction}
+\section{System Overview}
 Many different tools are available for measuring the quality of products made, but very few tools exist which assess the quality of the people making said products. People play a huge role in a project, and trying to monitor each and every one becomes a tedious task which diverts man power away from other more critical tasks. Whether it be for an end of year evaluation, or attempting to assess the current status of a project, generating a report on a staff member can help keep up productivity, as well as get them any help they need in order to resume quality performance. By ensuring that there is constant quality performance from each individual on a project, one can increase project quality as well as reduce project risks such as loss of an important team member during a critical stage of a project's life-cycle. 
 
-\section{Installation of software}
+\section{System Configuration}
+This guide has been made for users using a Linux based operating system. To install the HyperPerform system on the machine you will be required to have an active connection to the internet. Please note that high amounts of data might be consumed. 
 
-This installation guide assumes a Linux Server running Ubuntu 14 or higher, docker will later became available for easy install:
+\subsection{Docker installation}
+To install system with ease and avoid all configurations you can download Docker. Docker can be found at \url{www.docker.com} where guides are made available for installing docker on a particular operating system. If you intend to use Docker to install the HyperPerform system then please ensure you install Docker on your machine.
 
-\subsection{WildFly}
-The install WildFly 10 on your server: \\\\
-Elevate to sudo permissions:
+\subsection{Manual Installation}
+The manual installation requires you to download the source code from the GitHub repository. The newest release is highly recommended. To carry out a manual installation please ensure you have Maven and the WildFly application server on your machine. \\ \\
+Maven can be downloaded from: \url{maven.apache.org} \\ \\
+WildFly can be downloaded from: \url{wildfly.org} \\ \\
+Please ensure you download WildFly 10. The HyperPerform system was fully tested on this version of WildFly. Any other version might produce unexpected behaviour. \\ 
 
-\begin{lstlisting}
-sudo -s
-\end{lstlisting}
-Install Java JDK 8:
-\begin{lstlisting}
-aptitude update
-aptitude install --with-recommends software-properties-common
-add-apt-repository ppa:webupd8team/java
-aptitude update
-aptitude --with-recommends install oracle-java8-installer vim
-\end{lstlisting}
-Create a WildFly user:
-\begin{lstlisting}
-adduser --no-create-home --disabled-password --disabled-login wildfly
-\end{lstlisting}
-Download and extract the WildFly installation:
-\begin{lstlisting}
-cd /opt
-wget --tries=0 --continue http://download.jboss.org/wildfly/10.0.0.Final/wildfly-10.0.0.Final.tar.gz
-tar -xzvf wildfly-10.0.0.Final.tar.gz
-ln -s wildfly-10.0.0.Final wildfly
-chown -R wildfly wildfly
-\end{lstlisting}
-\pagebreak
-Copy the initialization scripts to the required folders:
-\begin{lstlisting}
-cp /opt/wildfly/docs/contrib/scripts/init.d/wildfly-init-debian.sh /etc/init.d/wildfly
-update-rc.d /etc/init.d/wildfly defaults
-cp /opt/wildfly/docs/contrib/scripts/init.d/wildfly.conf /etc/default/wildfly
-cd /etc/default
-\end{lstlisting}
-Now to edit the files:
-\begin{lstlisting}
-nano wildfly
-\end{lstlisting}
-Uncomment and/or Edit the following lines:
-\begin{lstlisting}
-JBOSS_HOME="/opt/wildfly"
-JBOSS_USER=wildfly
-JBOSS_MODE=standalone
-JBOSS_CONFIG=standalone-full.xml
-JBOSS_CONSOLE_LOG="/var/log/wildfly/console.log"
-\end{lstlisting}
-Change all 127.0.0.1 in standalone-full.xml to 0.0.0.0, then run the following commands:
-\begin{lstlisting}
-service wildfly start
-cd /opt/wildfly/bin
-./add-user.sh
-\end{lstlisting}
+\section{Installation}
 
-\subsection{PostgreSQL}
-The install PostgreSQL on your server: \\\\
+\subsection{Docker Installation}
+
+Assuming you have docker installed on your machine, simply run the following command in terminal: 
+
+\begin{lstlisting}[language=bash]
+docker run hyperperform/HyperPerform 
+\end{lstlisting}
+This will download the HyperPerform Docker image from DockerHub and run it on you machine. \\ \\
+The front end component does not have a Docker image at this point in time. To install the front end component please look at section 3.2.5 for the manual installation.
+
+\subsection{Manual Installation}
+This installation guide assumes a Linux Server running Ubuntu 14 or higher:
+
+\subsubsection{WildFly}
+Once you have downloaded the WildFly application server please carry out the WildFly installations and add a user. Once this is done proceed to installing PostgreSQL.
+
+%Elevate to sudo permissions:
+
+%\begin{lstlisting}
+%sudo -s
+%\end{lstlisting}
+%Install Java JDK 8:
+%\begin{lstlisting}
+%aptitude update
+%aptitude install --with-recommends software-properties-common
+%add-apt-repository ppa:webupd8team/java
+%aptitude update
+%aptitude --with-recommends install oracle-java8-installer vim
+%\end{lstlisting}
+%Create a WildFly user:
+%\begin{lstlisting}
+%adduser --no-create-home --disabled-password --disabled-login wildfly
+%\end{lstlisting}
+%Download and extract the WildFly installation:
+%\begin{lstlisting}
+%cd /opt
+%wget --tries=0 --continue http://download.jboss.org/wildfly/10.0.0.Final/wildfly-10.0.0.Final.tar.gz
+%tar -xzvf wildfly-10.0.0.Final.tar.gz
+%ln -s wildfly-10.0.0.Final wildfly
+%chown -R wildfly wildfly
+%\end{lstlisting}
+%\pagebreak
+%Copy the initialization scripts to the required folders:
+%\begin{lstlisting}
+%cp /opt/wildfly/docs/contrib/scripts/init.d/wildfly-init-debian.sh /etc/init.d/wildfly
+%update-rc.d /etc/init.d/wildfly defaults
+%cp /opt/wildfly/docs/contrib/scripts/init.d/wildfly.conf /etc/default/wildfly
+%cd /etc/default
+%\end{lstlisting}
+%Now to edit the files:
+%\begin{lstlisting}
+%nano wildfly
+%\end{lstlisting}
+%Uncomment and/or Edit the following lines:
+%\begin{lstlisting}
+%JBOSS_HOME="/opt/wildfly"
+%JBOSS_USER=wildfly
+%JBOSS_MODE=standalone
+%JBOSS_CONFIG=standalone-full.xml
+%JBOSS_CONSOLE_LOG="/var/log/wildfly/console.log"
+%\end{lstlisting}
+%Change all 127.0.0.1 in standalone-full.xml to 0.0.0.0, then run the following commands:
+%\begin{lstlisting}
+%service wildfly start
+%cd /opt/wildfly/bin
+%./add-user.sh
+%\end{lstlisting}
+
+\subsubsection{PostgreSQL}
+The install PostgreSQL on your machine: \\\\
 Install via terminal:
 \begin{lstlisting}
 sudo apt-get update
@@ -128,9 +152,10 @@ listen_addresses = "*"
 
 
 
-\subsection{ActiveMQ}
+\subsubsection{ActiveMQ}
 To setup ActiveMQ on your server: \\
 \begin{itemize}
+	\item Start up your WildFly application server
 	\item Navigate to WildFly management console on localhost:9990
 	\item Navigate to configurations tab and click on sub-systems
 	\item Scroll down and search for Messaging-ActiveMQ and click on it
@@ -143,37 +168,43 @@ To setup ActiveMQ on your server: \\
 	\item Click save \\
 \end{itemize}
 
+\subsubsection{Deploying to WildFly}
+To deploy the HyperPerform system to the application you will need to build the system using from the source code. 
 
-\subsection{Angular2}
-To install Angular2 on your server: \\\\
-Start by setting up node version manager:
-\begin{lstlisting}
-sudo apt-get update
-sudo apt-get install build-essential libssl-dev
-sudo curl https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
-source ~/.profile
-\end{lstlisting}
-Then setup node:
-\begin{lstlisting}
-nvm install 6.3.2
-\end{lstlisting}
-Then finish installing Angular2 with:
-\begin{lstlisting}
-npm install -g angular-cli
-\end{lstlisting}
+\begin{itemize}
+	\item Ensure the WildFly server is running.
+	\item Navigate to \url{https://github.com/HyperPerform/hyper-perform-server/releases} and download the newest release source code.
+	\item Extract the source code
+	\item Navigate to the root directory of the source code. A file named pom.xml should be clearly visible.
+	\item Run the following command: mvn clean wildfly:deploy
+	\item Maven will automatically deploy the compiled code to WildFly
+\end{itemize}
 
-\pagebreak
 
-\section{Installation of HyperPerform}
 
-\subsection{Server}
-To setup the back end, take the hyperperform.war and deploy it on the WildFly management console
+\subsubsection{Front-end Dashboard}
+To start up the front end please ensure you have Node installed on your machine. Node can be found at \url{https://nodejs.org/en/}. \\
 
-\subsection{Dashboard}
-To install the dashboard on your server:
-\begin{lstlisting}
-npm install hyperperform
-\end{lstlisting}
+\begin{itemize}
+	\item Download the Dashboard source code from \url{https://github.com/HyperPerform/hyper-perform-web-application}
+	\item Navigate to the root directory of the source code
+	\item Run the following command in terminal: npm install
+	\item Next run: npm install gulp
+	\item Finally: gulp serve
+\end{itemize}
+
+%\pagebreak
+
+%\section{Installation of HyperPerform}
+%
+%\subsection{Server}
+%To setup the back end, take the hyperperform.war and deploy it on the WildFly management console
+%
+%\subsection{Dashboard}
+%To install the dashboard on your server:
+%\begin{lstlisting}
+%npm install hyperperform
+%\end{lstlisting}
 
 
 \end{document}
