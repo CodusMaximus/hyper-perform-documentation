@@ -63,10 +63,16 @@ All the necessary dependencies for the project will be automatically downloaded.
 \section{Test items}
 At this point in the project the following features have been tested:
 \begin{itemize}
-	\item The GitListener which receives events from GitHub.
+	\item GitListener which receives events from GitHub.
 	\item GitPushEvent which is a POJO that contains information regarding a GitHub event.
-	\item CalendarListener which receives events from Google Calender service.
+	\item CalendarListener which receives events from Google Calendar service.
+	\item CalendarMeeting which is a POJO that contains information of Meetings from Google Calendar.
+	\item CalendarProject which is a POJO that contains information of Projects from Google Calendar. 
+	\item TravisListener which receives events from Travis CI.
+	\item TravisEvent which is a POJO that contains information regarding a build triggered by a push event from GitHub
+	\item AccessEvent which is a POJO that contains information of access in/out of a building containing a card reader.
 	\item The error codes and exceptions raised when accessing an invalid REST URL.
+	 
 \end{itemize}
 
 Mock JSON data has been passed to the GitListener and CalendarListener classes (into the listen functions). 
@@ -75,7 +81,7 @@ Each of these components have dependencies on features such as the messaging que
 
 \section{Features that will not be tested}
 
-Features that have been provided by frameworks will not be tested. Operations such as adding an object to a messaging queue will not be tested.
+Features that have been provided by frameworks will not be tested. Operations such as adding an object to a messaging queue will not be tested. Mapping of JSON data to request objects as this is also done by frameworks.
 
 \section{Components to be mocked}
 \begin{itemize}
@@ -87,6 +93,15 @@ Features that have been provided by frameworks will not be tested. Operations su
 \end{itemize}
 
 \section{Sample tests}
+The following figure is the GitListener dependency injected queue which allows multiple events to come through and not be lost and the creation of the entity manager.
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.7]{../Images/sample3.PNG}
+		\caption{GitListener Dependency injection}
+	\end{center}
+\end{figure}
+
+
 The following figure is one of the GitListener Event tests.
 
 \begin{figure}[H]
