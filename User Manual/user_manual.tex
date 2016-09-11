@@ -7,6 +7,10 @@
 \usepackage{float}
 \usepackage{geometry}
 \usepackage{listings}
+\lstset{
+	frame=single,
+	breaklines=true,
+}
 
 \newcommand{\subtitle}[1]{
   \posttitle{
@@ -136,12 +140,6 @@ Install via terminal:
 sudo apt-get update
 sudo apt-get install postgresql postgresql-contrib
 \end{lstlisting}
-Then create the required database:
-\begin{lstlisting}
-sudo -i -u postgres
-psql
-createdb hyperperform
-\end{lstlisting}
 To configure PostgreSQL to connect remotely:
 \begin{lstlisting}
 sudo nano /etc/postgresql/9.3/main/postgresql.conf
@@ -150,7 +148,27 @@ Edit the following lines:
 \begin{lstlisting}
 listen_addresses = "*"
 \end{lstlisting}
+\pagebreak
 
+
+\textbf{Create database hyperperform and the tables}\\
+Run the following commands in terminal: 
+\begin{lstlisting}
+   psql -c 'CREATE DATABASE hyperperform;' -U postgres
+  
+   psql -d hyperperform -c 'CREATE TABLE public."GitPush" ( id integer NOT NULL, repository character varying(255), "timestamp" timestamp without time zone, username character varying(255), commitsize integer, CONSTRAINT "GitPush_pkey" PRIMARY KEY (id) ); CREATE SEQUENCE public.hibernate_sequence INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1 CACHE 1;' -U postgres
+  
+   psql -d hyperperform -c 'CREATE TABLE public."TravisEvent" ( id integer NOT NULL, branch character varying(255), commiter character varying(255), repo character varying(255), status character varying(255), "timestamp" timestamp without time zone, CONSTRAINT "TravisEvent_pkey" PRIMARY KEY (id));' -U postgres
+  
+   psql -d hyperperform -c 'CREATE TABLE public."CalendarProject" ( projectid integer NOT NULL, calendarid character varying(255), collaborators bytea, creator character varying(255), duedate timestamp without time zone, eventid character varying(255), reponame character varying(255), "timestamp" timestamp without time zone, CONSTRAINT "CalendarProject_pkey" PRIMARY KEY (projectid));' -U postgres
+  
+   psql -d hyperperform -c 'CREATE TABLE public."CalendarMeeting" ( meetingid integer NOT NULL, calendarid character varying(255), creator character varying(255), duedate timestamp without time zone, eventid character varying(255), location character varying(255), "timestamp" timestamp without time zone, CONSTRAINT "CalendarMeeting_pkey" PRIMARY KEY (meetingid));' -U postgres
+  
+   psql -d hyperperform -c 'CREATE TABLE public."CalendarMeeting_attendees" ( "CalendarMeeting_meetingID" integer NOT NULL, attendees integer, attendees_key character varying(255) NOT NULL, CONSTRAINT "CalendarMeeting_attendees_pkey" PRIMARY KEY ("CalendarMeeting_meetingID", attendees_key), CONSTRAINT fkn4q1pmj9vx3tfsaw9irp9voax FOREIGN KEY ("CalendarMeeting_meetingID") REFERENCES public."CalendarMeeting" (meetingid) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION);' -U postgres
+  
+   psql -d hyperperform -c 'CREATE TABLE public."GitIssue"(id integer NOT NULL, action character varying(255), assignee character varying(255), createdby character varying(255), issueid bigint, repository character varying(255), "timestamp" timestamp without time zone, CONSTRAINT "GitIssue_pkey" PRIMARY KEY (id));' -U postgres
+
+\end{lstlisting}
 
 
 \subsubsection{ActiveMQ}
@@ -178,20 +196,35 @@ To deploy the HyperPerform system to the application you will need to build the 
 	\item Extract the source code
 	\item Navigate to the root directory of the source code. A file named pom.xml should be clearly visible.
 	\item Run the following command: mvn clean wildfly:deploy
-	\item Maven will automatically deploy the compiled code to WildFly
+	\item Maven will then ask you to provide your user name and password for the Wildfly Server.
+	\item Thereafter Maven will automatically deploy the compiled code (war) to WildFly
 \end{itemize}
 
 
 
 \subsubsection{Front-end Dashboard}
-
+Please notee that there is no release yet for the dashboard and there might be a few bugs, or limitations to the software.\\
+To start up the front end please ensure you have Node 6.4.0 or higher installed on your machine. Node can be found at \url{https://nodejs.org/en/}. \\\\\\
+\noindent
+\textbf{Please make sure that these commands execute successfully before attempting to run the system:}
+\begin{lstlisting}
+	 npm install -g gulp
+	 npm install -g bower
+	 npm install -g sass
+\end{lstlisting}
+Once that has completed with no errors do the following.
 \begin{itemize}
 	\item Download the Dashboard source code from \url{https://github.com/HyperPerform/hyper-perform-web-application}
 	\item Navigate to the root directory of the source code
-	\item Run the following command in terminal: npm install
-	\item Next run: npm install gulp
-	\item Finally: gulp serve
 \end{itemize}
+Run the following commands in terminal: 
+\begin{lstlisting}	
+	npm install
+	gulp build
+	gulp serve
+\end{lstlisting}
+\noindent
+The front-end system will auto launch in your default browser in order to view the data in the front-end system the Wildfly application server must be running.
 
 %\pagebreak
 
