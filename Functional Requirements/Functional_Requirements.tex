@@ -117,23 +117,29 @@ The scope of the integration module includes:
 \pagebreak
 
 \section{Algorithms}
+
+Algorithms are used in the calculation of performance scores. The entire Algorithms module is built using the Strategy design pattern. This allows for using different algorithms during runtime to calculate the scores. Since the Strategy design pattern is followed, new algorithms can easily be added with minimal code modification.
+
 \subsection{Scope}
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale=0.75]{../Images/Algorithms Scope.jpg}
+		\includegraphics[width=\linewidth]{../Images/Algorithms Scope.jpg}
 		\caption{Algorithms Scope}
 	\end{center}
 \end{figure}
 The scope of the algorithms module includes:
 \begin{itemize}
-	\item Determining which statistical algorithm will be appropriate in the current circumstances.
-	\item Applying this algorithm to the data provided, and then updating employee performance scores accordingly.
+	\item Determining which statistical algorithm will be appropriate with regards to the employee. 
+	
+	\item Different algorithms can be applied to different types of employees.
+	
+	\item Applying this algorithm to the data provided, and then presenting employee performance scores accordingly.
 \end{itemize}
 
 \subsection{Domain Model}
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale=0.45]{../Images/Algorithms_Domain_Model.jpg}
+		\includegraphics[width=\linewidth]{../Images/Algorithms_Domain_Model.jpg}
 		\caption{Algorithms Domain Model}
 	\end{center}
 \end{figure}
@@ -141,7 +147,7 @@ The scope of the algorithms module includes:
 \subsection{Service Contract}
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale=0.5]{../Images/Algorithms_Service_Contract.jpg}
+		\includegraphics[width=\linewidth]{../Images/Algorithms_Service_Contract.jpg}
 		\caption{Algorithms Service Contract}
 	\end{center}
 \end{figure}
@@ -149,12 +155,14 @@ The scope of the algorithms module includes:
 \pagebreak
 
 \section{Reporting}
+
+The reporting component allows for the processing and generation of data. This data allows users to see their current performance. The reporting component allows for generation of three types of reports: summarised and detailed reports as well as generation of a performance score.
+
 \subsection{Scope}
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[scale=0.75]{../Images/Reporting Scope.jpg}
+\begin{figure}[h!]
+		\includegraphics[width=\linewidth]{../Images/Reporting Scope.jpg}
 		\caption{Reporting Scope}
-	\end{center}
+		\centering
 \end{figure}
 The scope of the reporting module includes:
 \begin{itemize}
@@ -165,17 +173,16 @@ The scope of the reporting module includes:
 \subsection{Domain Model}
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale=0.44]{../Images/Reporting Domain Model.jpg}
+		\includegraphics[scale=0.45]{../Images/Reporting Domain Model.jpg}
 		\caption{Reporting Domain Model}
+		\centering
 	\end{center}
 \end{figure}
 
-
-
-\subsection{Service Contract}
-\begin{figure}[H]
+\subsection{Service Contracts}
+\begin{figure}[h!]
 	\begin{center}
-		\includegraphics[scale=0.5]{../Images/GetSummary Service Contract.jpg}
+		\includegraphics[width=\linewidth]{../Images/GetSummary Service Contract.jpg}
 		\caption{Get Summary Service Contract}
 	\end{center}
 \end{figure}
@@ -183,7 +190,7 @@ The scope of the reporting module includes:
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale=0.45]{../Images/GetDetails Service Contract.jpg}
+		\includegraphics[width=\linewidth]{../Images/GetDetails Service Contract.jpg}
 		\caption{Get Details Service Contract}
 	\end{center}
 \end{figure}
@@ -191,7 +198,7 @@ The scope of the reporting module includes:
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale=0.45]{../Images/getScore Service Contract.jpg}
+		\includegraphics[width=\linewidth]{../Images/getScore Service Contract.jpg}
 		\caption{Get Score Service Contract}
 	\end{center}
 \end{figure}
@@ -203,25 +210,62 @@ The scope of the reporting module includes:
 \subsection{Scope}
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale=0.6]{../Images/Notification Scope.jpg}
+		\includegraphics[width=\linewidth]{../Images/Notification Scope.jpg}
 		\caption{Notifications Scope}
 	\end{center}
 \end{figure}
 The scope of the notifications module includes:
 \begin{itemize}
-	\item Sending a notification of PA Score on a monthly basis.
 	\item When a new User is created by an Administrator, a notification will be sent to the user with initial passwords and information.
 	\item When a user forgets their password, a temporary password will be sent to the user and more instructions to change their password.
 \end{itemize}
 
+
 \subsection{Domain Model}
+
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale=0.55]{../Images/Notifications Domain Model.jpg}
+		\includegraphics[width=\linewidth]{../Images/Notifications Domain Model.jpg}
 		\caption{Notifications Domain Model}
 	\end{center}
 \end{figure}
 
+\section{Forecasting}
 
+The forecasting module is responsible for allowing the addition, modification and deletion of forecasted values. These values are predictions made by management which employees must try to conform to. Forecasted values may be used in conjunction with algorithms to allow for a more accurate calculation of performance scores. Forecasted values are contained in integrations. A manager is allowed to modify and add integrations along with forecast values.
+
+\begin{itemize}
+	\item To allow for pluggability the forecasting module consists of a contract. All realizations of the contract must adhere to the methods defined within the contract.
+	
+	\item Underlying representations of the forecasted values can be of any type and can be stored in any manner deemed beneficial.
+	
+	\item Since the forecasted values can have any representation, all necessary logic with regards to processing the data will be contained in the methods defined within the contract. This removes 'plumbing code' in the other components of the system.
+	
+	\item Since all forecast data processing occurs within the forecasting module only, it can be seen as a layer of abstraction over the representations of the forecasts themselves. The other components within the system will have no knowledge of the representation and will have controlled access to the data through the given contract.
+	
+	\item Representation of the forecast data can easily be changed without having to affecting the rest of the system. Forecast representations may be: JSON, XML, plain text etc. 
+\end{itemize} 
+
+\subsection{Service contracts}
+
+\begin{figure}[h!]
+	\includegraphics[width=\linewidth]{../Images/addIntegration_Service_Contract}
+	\caption{Service contract for adding integrations}
+\end{figure}
+
+\begin{figure}[h!]
+	\includegraphics[width=\linewidth]{../Images/delete_integration_Service_Contract}
+	\caption{Service contract for deleting integrations}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/GetForecastTime ServiceContract}
+	\caption{Service contract for getting a forecast timespan}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/GetForecastValue ServiceContract}
+	\caption{Service contract for getting a forecast value}
+\end{figure}
 
 \end{document}
