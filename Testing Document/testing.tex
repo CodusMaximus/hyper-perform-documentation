@@ -226,7 +226,74 @@ Result: \textbf{All Passed}
 \textbf{Input: } A mock access event is sent through \\
 \textbf{Outcome: } An HTTP 200 response code is expected. \\
 
-All these test cases can be found on the following link: \url{https://github.com/HyperPerform/hyper-perform-server/blob/develop/src/test/java/me/hyperperform/rest/RestTest.java}
+All these test cases above can be found on the following link: \url{https://github.com/HyperPerform/hyper-perform-server/blob/develop/src/test/java/me/hyperperform/rest/RestTest.java}
+
+
+
+\pagebreak
+
+
+\subsubsection{Test Class 5}
+All mock data can be found in the Appendix.\\
+\textbf{Test case 1: Create User Test} \\
+\textbf{Objective: } This test will create 2 different users with different roles and persist them into the database. \\
+\textbf{Input: } There is no direct input into this test.\\
+\textbf{Outcome: } The newly created users are successfully persisted to the database. \\
+
+\textbf{Test case 2: User Test} \\
+\textbf{Objective: } Check the integrity of the information of the above users and delete them from the database, to ensure no primary key violation. \\
+\textbf{Input: } There is no direct input into this test.\\
+\textbf{Outcome: } The newly created users data is as expected and then are successfully deleted from the database. \\
+
+
+\textbf{Test case 3: Registration Test} \\
+\textbf{Objective: } Check to see if a user can be added to the system with all valid information. \\
+\textbf{Input: } A mock normalUser event is sent through\\
+\textbf{Outcome: } An HTTP 200 response code is expected. There after the test will delete the user to ensure no primary key violation. \\
+
+
+\textbf{Test case 4: Invalid Name Test} \\
+\textbf{Objective: } Check to see if a user can be added to the system with no username. \\
+\textbf{Input: }  A mock noUsername event is sent through.\\
+\textbf{Outcome: } An HTTP 200 response code is expected with a response message "Error: name" \\
+
+\textbf{Test case 5: Invalid Surname Test} \\
+\textbf{Objective: } Check to see if a user can be added to the system with no surname. \\
+\textbf{Input: }  A mock noSurname event is sent through.\\
+\textbf{Outcome: } An HTTP 200 response code is expected with a response message "Error: surname" \\
+
+\textbf{Test case 6: Invalid Email Test} \\
+\textbf{Objective: } Check to see if a user can be added to the system with no email. \\
+\textbf{Input: }  A mock noEmail event is sent through.\\
+\textbf{Outcome: } An HTTP 200 response code is expected with a response message "Error: email" \\
+
+\textbf{Test case 7: Invalid Role Test} \\
+\textbf{Objective: } Check to see if a user can be added to the system with an invalid role. \\
+\textbf{Input: }  A mock invalidRole event is sent through.\\
+\textbf{Outcome: } An HTTP 200 response code is expected with a response message "Error: Role does not exist" \\
+
+
+\textbf{Test case 8: Invalid Position Test} \\
+\textbf{Objective: } Check to see if a user can be added to the system with an invalid position. \\
+\textbf{Input: }  A mock invalidPosition event is sent through.\\
+\textbf{Outcome: } An HTTP 200 response code is expected with a response message "Error: Position does not exist" \\
+
+
+\textbf{Test case 9: Invalid GitUsername Test} \\
+\textbf{Objective: } Check to see if a user can be added to the system with an no GitUserName. \\
+\textbf{Input: }  A mock noGitUsername event is sent through.\\
+\textbf{Outcome: } An HTTP 200 response code is expected with a response message "Error: gitUserName" \\
+
+
+\textbf{Test case 10: Invalid Password} \\
+\textbf{Objective: } Check to see if a user can be added to the system with an no password. \\
+\textbf{Input: }  A mock noPassword event is sent through.\\
+\textbf{Outcome: } An HTTP 200 response code is expected with a response message "Error: password" \\
+
+All these test cases above can be found on the following link: \url{https://github.com/HyperPerform/hyper-perform-server/blob/develop/src/test/java/me/hyperperform/user/UserTest.java}
+
+
+
 
 \section{Conclusion}
 All of Test have passed as we made sure of it and since we using Travis CI which is an automated build system so if it fails we work on the issues and make the fixes. The limitations to these tests is that the require the relevant tables to already exist in the Postgres Database as JPA will not create these tables. A work around for this is to write a script or a unit test that will create these tables if they don't exist before the rest of the unit tests are executed.
