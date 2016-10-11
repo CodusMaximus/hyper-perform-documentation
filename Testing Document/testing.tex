@@ -226,6 +226,8 @@ Result: \textbf{All Passed}
 \textbf{Input: } A mock access event is sent through \\
 \textbf{Outcome: } An HTTP 200 response code is expected. \\
 
+All these test cases can be found on the following link: \url{https://github.com/HyperPerform/hyper-perform-server/blob/develop/src/test/java/me/hyperperform/rest/RestTest.java}
+
 \section{Conclusion}
 All of Test have passed as we made sure of it and since we using Travis CI which is an automated build system so if it fails we work on the issues and make the fixes. The limitations to these tests is that the require the relevant tables to already exist in the Postgres Database as JPA will not create these tables. A work around for this is to write a script or a unit test that will create these tables if they don't exist before the rest of the unit tests are executed.
 
