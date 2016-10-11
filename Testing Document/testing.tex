@@ -47,6 +47,9 @@
 
 This document explains implementation of unit tests which were used to test each component in an isolated environment. It also includes an overview of the technologies used as well as instructions on how to execute these tests. \\ 
 
+\section{Purpose}
+The HyperPerform system was made to be able to track employee performance. One of the main goals of the system is to be able to use the system in any industrial or academic field. To ensure this each component of the system is decoupled from every other. All aspects of the system are implemented such that they conform to the given contracts. Unit testing is essential to ensure that these contracts are not violated in anyway and to ensure that the components that expose the services (REST wrapping) are all working properly before the system is deployed.
+
 \section{Technologies}
 
 Since the system was primarily coded with Java we used JUnit to carry out the unit tests for each of the components. We also used Spring to allow us to use dependency injection within each test, this allows us to easily inject mocks and test components in an isolated environment. \\\\
