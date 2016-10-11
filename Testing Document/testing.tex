@@ -52,7 +52,10 @@ The HyperPerform system was made to be able to track employee performance. One o
 
 \section{Technologies}
 
-Since the system was primarily coded with Java we used JUnit to carry out the unit tests for each of the components. We also used Spring to allow us to use dependency injection within each test, this allows us to easily inject mocks and test components in an isolated environment. \\\\
+Since the system was primarily coded with Java we used JUnit to carry out the unit tests for each of the components. We also used Spring to allow us to use dependency injection within each test, this allows us to easily inject mocks and test components in an isolated environment. \\
+
+Maven was used as the build tool for this system. When building the system from its source code all unit tests are automatically executed by Maven.  \\
+
 Another technology which proved useful was a Mock Dispatcher framework which ships with RESTEasy. The mock dispatcher allows one to easily and efficiently test REST API's without having to deploy the component to an application server.
 
 \section{Testing environment}
