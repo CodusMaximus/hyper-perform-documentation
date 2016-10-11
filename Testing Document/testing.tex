@@ -231,4 +231,49 @@ All these test cases can be found on the following link: \url{https://github.com
 \section{Conclusion}
 All of Test have passed as we made sure of it and since we using Travis CI which is an automated build system so if it fails we work on the issues and make the fixes. The limitations to these tests is that the require the relevant tables to already exist in the Postgres Database as JPA will not create these tables. A work around for this is to write a script or a unit test that will create these tables if they don't exist before the rest of the unit tests are executed.
 
+\newpage
+
+\section{Appendix}
+
+\subsection{Mock Events}
+\textbf{Please note that some of these mock events are very large. Due to this redundant data has been removed from the events so that they can be presented in this document.} \\
+
+The fully detailed mock events can be found through the following link: \url{https://github.com/HyperPerform/hyper-perform-server/blob/develop/src/test/java/me/hyperperform/event/MockEvent.java} \\
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=1.0]{../Images/accessEvent}
+	\caption{Access event payload}
+\end{figure}
+ 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=1.0]{../Images/loginEvent}
+	\caption{Login payload}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{../Images/gitpush}
+	\caption{Git push event payload}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{../Images/altgitpush}
+	\caption{Alternative Git push event payload}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{../Images/gitissues}
+	\caption{Git issues event payload}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{../Images/travisEvent}
+	\caption{Travis build event payload}
+\end{figure}
+
 \end{document}
