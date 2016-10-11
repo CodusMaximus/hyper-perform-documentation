@@ -7,6 +7,9 @@
 \usepackage{float}
 \usepackage{geometry}
 \usepackage{listings}
+\usepackage{parskip}
+
+\setlength{\parindent}{0pt}
 
 \newcommand{\subtitle}[1]{
   \posttitle{
@@ -176,17 +179,53 @@ Result: \textbf{All Passed}
 
 
 \subsubsection{Test Class 4}
-\url{https://github.com/HyperPerform/hyper-perform-server/blob/develop/src/test/java/me/hyperperform/rest/RestTest.java}\\\\
-\textbf{RestTest}
-\begin{itemize}
-	\item $gitIssueEventTest$ - Uses MockEvent.gitIssuesEvent JSON data for issues and tests the Gitlistener.
-	\item $calendarSimpleTest$ - Uses MockEvent.calendarEvents JSON data for Calendar Events and tests the CalendarListener.
-	\item $invalidLinkTest$ - Checks a random invalid rest link to see if it gets a HTTP 404 Error response.
-	\item $travisTest$ - Uses MockEvent.travisEvent JSON data for travis build and tests the Travislistener.
-	\item $timezoneTest$ - Uses MockEvent.alternativeGitPush JSON data for push events with different timezones and tests the Gitlistener for different timezones.
-	\item $gitEventTest$ - Uses MockEvent.gitPushEvent JSON data for push events and tests the Gitlistener.
-\end{itemize}
-Result: \textbf{All Passed}\\\\
+%\url{https://github.com/HyperPerform/hyper-perform-server/blob/develop/src/test/java/me/hyperperform/rest/RestTest.java}\\\\
+%\textbf{RestTest}
+%\begin{itemize}
+%	\item $gitIssueEventTest$ - Uses MockEvent.gitIssuesEvent JSON data for issues and tests the Gitlistener.
+%	\item $calendarSimpleTest$ - Uses MockEvent.calendarEvents JSON data for Calendar Events and tests the CalendarListener.
+%	\item $invalidLinkTest$ - Checks a random invalid rest link to see if it gets a HTTP 404 Error response.
+%	\item $travisTest$ - Uses MockEvent.travisEvent JSON data for travis build and tests the Travislistener.
+%	\item $timezoneTest$ - Uses MockEvent.alternativeGitPush JSON data for push events with different timezones and tests the Gitlistener for different timezones.
+%	\item $gitEventTest$ - Uses MockEvent.gitPushEvent JSON data for push events and tests the Gitlistener.
+%\end{itemize}
+%Result: \textbf{All Passed}\\\\
+
+\textbf{Test case 1: Git Push Event Test} \\
+\textbf{Objective: } This test will ensure that the git listener REST endpoint is working and successfully receives events \\
+\textbf{Input: } A mock git push event is send through to the link \\
+\textbf{Outcome: } Once the event is sent through, a HTTP 200 response code is expected. \\
+
+\textbf{Test case 2: Git Issues Event Test} \\
+\textbf{Objective: } This test will ensure that the git listener REST endpoint is working and successfully accepts git issue events \\
+\textbf{Input: } A mock git issue event is send through to the link \\
+\textbf{Outcome: } Once the event is sent through, a HTTP 200 response code is expected. \\
+
+\textbf{Test case 3: Invalid link Test} \\
+\textbf{Objective: } This test is used to see if an appropriate response is sent for non-existing pages \\
+\textbf{Input: } An intentional invalid link is accessed \\
+\textbf{Outcome: } An HTTP 404 response code is expected. \\
+
+\textbf{Test case 4: Timezone Test}  \\
+\textbf{Objective: } This test checks the  adaptability of the Git Listeners in terms of timezones. Its aims to see if a correct timezone can be parsed from the received data. \\
+\textbf{Input: } An alternative git push event is sent through \\
+\textbf{Outcome: } An HTTP 200 response code is expected. \\
+
+\textbf{Test case 5: Travis Test}  \\
+\textbf{Objective: } This test checks whether or not the travis listener is working. This is tested by sending through a mock event \\
+\textbf{Input: } A travis event is sent through \\
+\textbf{Outcome: } An HTTP 200 response code is expected. \\
+
+\textbf{Test case 6: Login Test}  \\
+\textbf{Objective: } This test checks whether or not the login subsystem under the user management system is working.\\
+\textbf{Input: } Mock user details are sent through to the REST endpoint \\
+\textbf{Outcome: } An HTTP 200 response code is expected. \\
+
+\textbf{Test case 7: Access Test}  \\
+\textbf{Objective: } This test checks whether or not the access listener is working. This is tested by sending through a mock event \\
+\textbf{Input: } A mock access event is sent through \\
+\textbf{Outcome: } An HTTP 200 response code is expected. \\
+
 \section{Conclusion}
 All of Test have passed as we made sure of it and since we using Travis CI which is an automated build system so if it fails we work on the issues and make the fixes. The limitations to these tests is that the require the relevant tables to already exist in the Postgres Database as JPA will not create these tables. A work around for this is to write a script or a unit test that will create these tables if they don't exist before the rest of the unit tests are executed.
 
