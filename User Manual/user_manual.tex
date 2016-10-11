@@ -190,11 +190,24 @@ To setup ActiveMQ on your server: \\
 	\item Navigate to configurations tab and click on sub-systems
 	\item Scroll down and search for Messaging-ActiveMQ and click on it
 	\item Click on default, select queues/topics
+		\begin{figure}[H]
+		\begin{center}
+			\includegraphics[width=\linewidth]{../Images/defaultqueue}
+			\caption{Subsystems Configuration}
+		\end{center}
+	\end{figure}
 	\item Click add and input the following information:
 		\begin{itemize}
 			\item Name*: hyperperform
 			\item JNDI Names*: java:/jms/queue/hyperperform
 		\end{itemize}
+			\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.4]{../Images/queueconf}
+			\caption{Queue Configuration}
+		\end{center}
+	\end{figure}
+	
 	\item Click save \\
 \end{itemize}
 
@@ -206,6 +219,12 @@ To setup Notifications via Email on the server: \\
 	\item Navigate to WildFly management console on localhost:9990
 	\item Navigate to configurations tab and click on sub-systems
 	\item Scroll down and search for Email and click on it
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[width=0.6\linewidth]{../Images/subsystem}
+			\caption{Subsystem Email}
+		\end{center}
+	\end{figure}
 	\item Click add and input the following information:
 	\begin{itemize}
 		\item Name*: Gmail 
@@ -222,12 +241,24 @@ To setup Notifications via Email on the server: \\
 	\end{itemize}
 	\item There after reload the server
 	\item After reloading navigate to configurations tab and the Socket Bindings
+		\begin{figure}[H]
+		\begin{center}
+			\includegraphics[width=\linewidth]{../Images/socket}
+			\caption{Socket Bindings}
+		\end{center}
+	\end{figure}
 	\item Click on View and there after under standard-sockets click view
 	\item Navigate to Outbound Remote and edit the mail-smtp socket bindings
 		\begin{itemize}
 		\item Host: smpt.gmail.com
 		\item Port: 465
 	\end{itemize}
+	\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=\linewidth]{../Images/outbound}
+		\caption{Outbound Socket Configuration}
+	\end{center}
+\end{figure}
 	\item Reload server
 \end{itemize}
 
