@@ -280,20 +280,163 @@ All mock data can be found in the Appendix.\\
 
 
 \textbf{Test case 9: Invalid GitUsername Test} \\
-\textbf{Objective: } Check to see if a user can be added to the system with an no GitUserName. \\
+\textbf{Objective: } Check to see if a user can be added to the system with no GitUserName. \\
 \textbf{Input: }  A mock noGitUsername event is sent through.\\
 \textbf{Outcome: } An HTTP 200 response code is expected with a response message "Error: gitUserName" \\
 
 
 \textbf{Test case 10: Invalid Password} \\
-\textbf{Objective: } Check to see if a user can be added to the system with an no password. \\
+\textbf{Objective: } Check to see if a user can be added to the system with no password. \\
 \textbf{Input: }  A mock noPassword event is sent through.\\
 \textbf{Outcome: } An HTTP 200 response code is expected with a response message "Error: password" \\
 
 All these test cases above can be found on the following link: \url{https://github.com/HyperPerform/hyper-perform-server/blob/develop/src/test/java/me/hyperperform/user/UserTest.java}
 
+\subsubsection{Test Class 6}	
+\textbf{Test case 1: Create Access Event Test} \\
+\textbf{Objective: } The purpose of this test is to be a precursor to see if an access event can be created and then persisted to the database. \\
+\textbf{Input: } There is no direct input to the test. \\
+\textbf{Outcome: } The following are expected outcomes for the functionality: 
+\begin{enumerate}
+	\item The access event should be persisted in the database. This is tested in test case 3\\
+	%		\item The test should assert that the email address and timestamp is the same as the ones persisted.\\
+\end{enumerate}
+\noindent
+\textbf{Test case 2: POJO Test} \\
+\textbf{Objective: } The purpose of this test is to check if the access event from test case 1 mapped correctly to the \textit{AccessEvent} POJO. \\
+\textbf{Input: } There is no direct input to the test. \\
+\textbf{Outcome: } The following are expected outcomes for the functionality:
+\begin{enumerate}
+	\item Should assert that the expected name is the same as the name mapped on to the POJO.
+	\item Should assert that the expected email address is the same as the email address mapped on to the POJO.
+	\item Should assert that the expected surname is equal to the surname mapped on to the POJO.
+	\item Should assert that the expected userID is equal to the userID mapped on to the POJO.
+	\item Should assert that the expected deviceID is equal to the deviceID mapped on to the POJO.
+	\item Should assert that the expected day is equal to the day mapped on to the POJO.
+	\item Should assert that the expected timestamp is equal to the timestamp mapped on to the POJO.\\
+\end{enumerate}
 
+\noindent
+\textbf{Test case 3: Querying the database test} \\
+\textbf{Objective: } The purpose of this test is to query the AccessEvent table in the database and check if the access event from test case 1 persisted correctly to the database. \\
+\textbf{Input: } There is no direct input to the test. \\
+\textbf{Outcome: } The following are expected outcomes for the functionality:
+\begin{enumerate}
+	\item Should assert that the expected name is equal to that of the one persisted.
+	\item Should assert that the expected email address is equal to that of the one persisted.
+	\item Should assert that the expected surname is equal to that of the one persisted.
+	\item Should assert that the expected userID is equal to that of the one persisted.
+	\item Should assert that the expected deviceID is equal to that of the one persisted.
+	\item Should assert that the expected day is equal to that of the one persisted.
+	\item Should assert that the expected timestamp is equal to that of the one persisted.\\
+\end{enumerate}
 
+All these test cases can be found on the following link:
+\url{https://github.com/HyperPerform/hyper-perform-server/blob/develop/src/test/java/me/hyperperform/event/EntryExitTest.java}
+
+\subsubsection{Test Class 7}	
+\textbf{Test case 1: Create Travis Event Test} \\
+\textbf{Objective: } The purpose of this test is to see if a Travis Event can be created, mapped to the POJO and then persisted to the database. \\
+\textbf{Input: } There is no direct input to the test. \\
+\textbf{Outcome: } The following are expected outcomes for the functionality: 
+\begin{enumerate}
+	\item The created Travis event should be persisted to the database. This is tested in test case 9.\\
+\end{enumerate}
+\noindent
+\textbf{Test case 2: Create Git Issue Test} \\
+\textbf{Objective: } The purpose of this test is to see if a Git Issue Event can be created, mapped to the POJO and then persisted to the database. \\
+\textbf{Input: } There is no direct input to the test. \\
+\textbf{Outcome: } The following are expected outcomes for the functionality: 
+\begin{enumerate}
+	\item The Git Issue that was created should be persisted to the database. This is queried and tested in test case 8.\\
+\end{enumerate}
+\noindent
+\textbf{Test case 3: Create Git Push Test} \\
+\textbf{Objective: } The purpose of this test is to see if a Git Push Event can be created, mapped to the POJO and then persisted to the database. \\
+\textbf{Input: } There is no direct input to the test. \\
+\textbf{Outcome: } The following are expected outcomes for the functionality: 
+\begin{enumerate}
+	\item The Git Push (along with their commits) that was created should be persisted to the database. This is queried and tested in test case 7.\\
+\end{enumerate}
+\noindent
+\textbf{Test case 4: Travis Event POJO Test} \\
+\textbf{Objective: } The purpose of this test is to see if the Travis Event in test case 1 mapped correctly to the POJO. \\
+\textbf{Input: } There is no direct input to the test. \\
+\textbf{Outcome: } The following are expected outcomes for the functionality:
+\begin{enumerate}
+	\item Should assert that the expected committer is equal to that of the one mapped onto the POJO.
+	\item Should assert that the expected branch is equal to that of the one mapped onto the POJO.
+	\item Should assert that the expected status of the issue is equal to that of the one mapped onto the POJO.
+	\item Should assert that the expected timestamp is equal to that of the one mapped onto the POJO.
+	\item Should assert that the expected repository name is equal to that of the one mapped onto the POJO.\\
+\end{enumerate}
+\noindent
+\textbf{Test case 5: Git Issue POJO Test} \\
+\textbf{Objective: } The purpose of this test is to see if the Git Issue in test case 2 mapped correctly to the POJO. \\
+\textbf{Input: } There is no direct input to the test. \\
+\textbf{Outcome: } The following are expected outcomes for the functionality:
+\begin{enumerate}
+	\item Should assert that the expected issueId is equal to that of the one mapped onto the POJO.
+	\item Should assert that the expected action is equal to that of the one mapped onto the POJO.
+	\item Should assert that the expected repository name is equal to that of the one mapped onto the POJO.
+	\item Should assert that the timestamp that was mapped onto the POJO is not null.
+	\item Should assert that the expected timestamp is equal to that of the one mapped onto the POJO.
+	\item Should assert that the expected assignee of the issue is equal to that of the one mapped onto the POJO.
+	\item Should assert that the expected creator of the issue is equal to that of the one mapped onto the POJO.\\
+\end{enumerate}
+\noindent
+\textbf{Test case 6: Git Push POJO Test} \\
+\textbf{Objective: } The purpose of this test is to see if the Git Push Event in test case 3 mapped correctly to the POJO. \\
+\textbf{Input: } There is no direct input to the test. \\
+\textbf{Outcome: } The following are expected outcomes for the functionality:
+\begin{enumerate}
+	\item Should assert that the expected repository name/path is equal to that of the one mapped onto the POJO.
+	\item Should assert that the expected timestamp is equal to that of the one mapped onto the POJO.
+	\item Should assert that the expected username is equal to that of the one mapped onto the POJO.
+	\item Should assert that the commit size that was mapped onto the POJO cannot be equal to zero.
+	\item Should assert that the expected commit size is equal to that of the one mapped onto the POJO.\\
+\end{enumerate}
+\noindent
+\textbf{Test case 7: Git Push Query Test} \\
+\textbf{Objective: } The purpose of this test is to query the GitPush table in the database and check if the GitPush event from test case 3 persisted correctly to the database. \\
+\textbf{Input: } There is no direct input to the test. \\
+\textbf{Outcome: } The following are expected outcomes for the functionality:
+\begin{enumerate}
+	\item Should assert that the query from the database does return results thus the number of results is not equal to 0 (zero).
+	\item Should assert that the expected repository name/path is equal to that of the one persisted.
+	\item Should assert that the expected Date (extracted from the timestamp) is equal to that of the one persisted.
+	\item Should assert that the expected username is equal to that of the one persisted.
+	\item Should assert that the commit size that was persisted to the database cannot be equal to zero.
+	\item Should assert that the expected commit size is equal to that of the one persisted.\\
+\end{enumerate}
+\noindent
+\textbf{Test case 8: Git Issue Query Test} \\
+\textbf{Objective: } The purpose of this test is to query the GitIssue table in the database and check if the GitIssue event from test case 2 persisted correctly to the database. \\
+\textbf{Input: } There is no direct input to the test. \\
+\textbf{Outcome: } The following are expected outcomes for the functionality:
+\begin{enumerate}
+	\item Should assert that the query from the database does return results (i.e. the number of results is not equal to 0 (zero)).
+	\item Should assert that the expected action is equal to that of the one persisted.
+	\item Should assert that the expected repository name is equal to that of the one persisted.
+	\item Should assert that the expected timestamp is equal to that of the one persisted.
+	\item Should assert that the expected assignee of the issue is equal to that of the one persisted.
+	\item Should assert that the expected creator of the issue is equal to that of the one persisted.\\
+\end{enumerate}
+\noindent
+\textbf{Test case 9: Travis Event Query Test} \\
+\textbf{Objective: } The purpose of this test is to query the TravisEvent table in the database and check if the Travis event from test case 1 persisted correctly to the database. \\
+\textbf{Input: } There is no direct input to the test. \\
+\textbf{Outcome: } The following are expected outcomes for the functionality:
+\begin{enumerate}
+	\item Should assert that the query from the database does return results thus the number of results is not equal to 0 (zero).
+	\item Should assert that the expected committer is equal to that of the one persisted.
+	\item Should assert that the expected branch, on which the builds was done, is equal to that of the one persisted.
+	\item Should assert that the expected status of the build is equal to that of the one persisted.
+	\item Should assert that the expected timestamp is equal to that of the one persisted.
+	\item Should assert that the expected repository name is equal to that of the one persisted.\\
+\end{enumerate}
+All these test cases can be found on the following link:
+\url{https://github.com/HyperPerform/hyper-perform-server/blob/develop/src/test/java/me/hyperperform/event/PersistenceTest.java}
 
 \section{Conclusion}
 All of Test have passed as we made sure of it and since we using Travis CI which is an automated build system so if it fails we work on the issues and make the fixes. The limitations to these tests is that the require the relevant tables to already exist in the Postgres Database as JPA will not create these tables. A work around for this is to write a script or a unit test that will create these tables if they don't exist before the rest of the unit tests are executed.
