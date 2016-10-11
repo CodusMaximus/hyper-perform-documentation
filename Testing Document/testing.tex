@@ -61,8 +61,11 @@ Another technology which proved useful was a Mock Dispatcher framework which shi
 \section{Testing environment}
 \begin{itemize}
 	\item \textbf{Programming Languages:} Java with JavaEE for the back-end server, front-end relies on AngularJS with Bootstrap.
-	\item \textbf{Testing frameworks: } Unit testing is done using JUnit.
-	\item \textbf{Operating System: } The system is designed for any operating system provided the correct software is correctly setup. This system was developed in Linux OS. The system will also have Docker for easy of usage.
+	
+	\item \textbf{Testing frameworks: } Unit testing is done using JUnit. This is used in conjunction with Spring, which is used to achieve dependency injection within the unit tests.
+	
+	\item \textbf{Operating System: } The unit tests are not platform specific. The only requirement in terms of operating systems is that Maven must be supported. If Maven is supported then all unit test dependencies will be downloaded and all the tests will be executed automatically.
+	
 	\item \textbf{Internet Browsers: } The front-end system supports the latest versions of 
 	$Google Chrome$ and $Firefox$. There is limited support for other browsers.
 \end{itemize}
