@@ -29,16 +29,18 @@
 			\includegraphics[height=200px]{../Images/CodusMaximus_logo.jpg}
 \end{figure}
 
-	
 \author{
 	\textbf{Developers:} \\
 	Rohan Chhipa		\emph{14188377}	\\
 	Claudio Da Silva	\emph{14205892}	\\
 	Jason Gordon		\emph{14405025}	\\
-	Avinash Singh		\emph{14043778}	\\\\
+	Avinash Singh		\emph{14043778}	\\\\	
 }
 
+\subtitle{Client: Schalk Lotz, Magna BC}
+
 \date{\textbf{Updated \today}}
+
 
 \maketitle
 \thispagestyle{empty}
@@ -48,7 +50,8 @@
 \pagebreak
 
 \section{System Overview}
-Many different tools are available for measuring the quality of products made, but very few tools exist which assess the quality of the people making said products. People play a huge role in a project, and trying to monitor each and every one becomes a tedious task which diverts man power away from other more critical tasks. Whether it be for an end of year evaluation, or attempting to assess the current status of a project, generating a report on a staff member can help keep up productivity, as well as get them any help they need in order to resume quality performance. By ensuring that there is constant quality performance from each individual on a project, one can increase project quality as well as reduce project risks such as loss of an important team member during a critical stage of a project's life-cycle. 
+Many different tools are available for measuring the quality of products made, but very few tools exist which assess the quality of the people making said products. People play a huge role in a project, and trying to monitor each and every one becomes a tedious task which diverts man power away from other more critical tasks. Whether it be for an end of year evaluation, or attempting to assess the current status of a project, generating a report on a staff member can help keep up productivity, as well as get them any help they need in order to resume quality performance. By ensuring that there is constant quality performance from each individual on a project, one can increase project quality as well as reduce project risks such as loss of an important team member during a critical stage of a project's life-cycle. \\ \\
+The HyperPerform system has the ability to automatically gather information from multiple integrations such as GitHub and Travis. However due to the highly pluggable nature of the system one could easily add more integrations to pull information from. The HyperPerform system simplifies management by allowing a manager to view all relevant employee data in simple and easy to understand reports, where reports can be a summarised report or a more detailed report on employee activity.
 
 \section{System Configuration}
 This guide has been made for users using a Linux based operating system. To install the HyperPerform system on the machine you will be required to have an active connection to the internet. Please note that high amounts of data might be consumed. 
@@ -73,7 +76,7 @@ Assuming you have docker installed on your machine, simply run the following com
 docker run hyperperform/HyperPerform 
 \end{lstlisting}
 This will download the HyperPerform Docker image from DockerHub and run it on you machine. \\ \\
-The front end component does not have a Docker image at this point in time. To install the front end component please look at section 3.2.5 for the manual installation.
+The front end component does not have a Docker image at this point in time. To install the front end component please refer to section 3.2.5 for the manual installation.
 
 \subsection{Manual Installation}
 This installation guide assumes a Linux Server running Ubuntu 14 or higher:
