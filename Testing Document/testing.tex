@@ -116,12 +116,34 @@ The event listener are a crucial component to the HyperPerform system. Without t
 	\item \textbf{AccessListener} - Receives access events from Entry/Exit.
 \end{itemize}
 
-Mock JSON data has been passed to the GitListener, TravisListener and AccessListener classes (into the listen functions). These mock events can be found in the Appendix.\\\\
-Each of these components have dependencies on features such as the messaging queue. All of these features are mocked out to ensure each component is tested in isolation. These features were mocked through dependency injection which was provided by Spring. \\
+Mock JSON data has been passed to the GitListener, TravisListener and AccessListener classes (into the listen functions). These mock events can be found in the Appendix.
+Each of these components have dependencies on features such as the messaging queue. All of these features are mocked out to ensure each component is tested in isolation. These features were mocked through dependency injection which was provided by Spring.
+
+\subsection{Event POJO's}
+The event POJO's contain all the important employee data that needs to be processed at a later stage. The persistability of these POJO's is crucial for the HyperPerform system. The following POJO's will be tested:
+\begin{itemize}
+	\item \textbf{GitPushEvent} - A POJO that contains information regarding a GitHub push event.
+	\item \textbf{TravisEvent} - A POJO that contains information regarding a build triggered by a push event from GitHub.
+	\item \textbf{GitIssueEvent} - A POJO that contains information regarding a GitHub issue that has been created.
+	\item \textbf{AccessEvent} - A POJO that contains information regarding access in/out of a building containing a card reader.
+	\item \textbf{User} - A POJO that contains information regarding a user who has been registered to the system.
+\end{itemize}
+
+\subsection{User management}
+This section entails testing the user management functionallity of the system. The following items will be tested:
+\begin{itemize}
+	\item \textbf{User creation} - Ability to successfully create and persist a new user to the database.
+	\item \textbf{Invalid names} - Checks the validity of the username provided.
+	\item \textbf{Invalid E-mail} - Checks the validity of the E-mail provided. Also checks if E-mail already exists within the system.
+	\item \textbf{Invalid role} - Checks the validity of the employee role. Roles are provided by the system but integrity of the role must still be tested.
+	\item \textbf{Invalid Position} - Checks the validity of the employee position. Positions are provided by the system but integrity of the position must still be tested.
+	\item \textbf{Invalid Password} - Checks validity of password.
+\end{itemize}
 
 \section{Features that will not be tested}
 
-Features that have been provided by frameworks will not be tested. Operations such as adding an object to a messaging queue will not be tested. Mapping of JSON data to request objects as this is also done by frameworks.
+Features that have been provided by frameworks will not be tested. Operations such as adding an object to a messaging queue will not be tested. Mapping of JSON data to request objects as this is also done by frameworks. \\ \\
+The ability to persist POJO's will not be tested within the listeners. These persistence tests are kept separate.
 
 \section{Components to be mocked}
 \begin{itemize}
