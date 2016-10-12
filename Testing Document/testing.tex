@@ -63,7 +63,9 @@
 This document explains implementation of unit tests which were used to test each component in an isolated environment. It also includes an overview of the technologies used as well as instructions on how to execute these tests. \\ 
 
 \section{Purpose}
-Hyper Perform is an automated performance tracking tool, which sources information from many different integrations in order to provide information about various employee's performances levels and how they affect the current project's success level. One of the main goals of the system is for the system to be able to be used commercially or in an academic setting. To ensure that each component of the system is decoupled from every other; all aspects of the system are implemented such that they conform to the given contracts. Unit testing is essential to ensure that these contracts are not violated in any way and to ensure that the components that expose the services (REST wrapping) are all working properly before the system is deployed.
+Hyper Perform is an automated performance tracking tool, which sources information from many different integrations in order to provide information about various employee's performances levels and how they affect the current project's success level. One of the main goals of the system is for the system to be able to be used commercially or in an academic setting. To ensure that each component of the system is decoupled from every other; all aspects of the system are implemented such that they conform to the given contracts. \\ \\
+Thorough unit testing allows us to ensure that the each component of the HyperPerform system is working correctly. Unit testing gives us the ability to test the response of the system under different conditions. \\ \\
+All unit tests were written in such a way that the system is fully tested before being deployed, this includes testing all REST endpoints which are exposed, ensuring that the database is set up correctly and accepting objects to be persisted and ensuring that all subsystem contracts are met.
 
 \section{Technologies}
 
