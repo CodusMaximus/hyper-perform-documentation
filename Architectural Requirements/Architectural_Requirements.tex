@@ -172,7 +172,7 @@ With regards to integration, the system has the following adapters on which to m
 	\item Similarly the events that are retrieved will come through the REST wrapping designed specifically for the events. Each integration has its own REST URL to which it sends events.
 \end{itemize}
 Thus since the events come through the REST URL's we don't have to continuously poll these systems. Instead the separate systems send the events when ready, these are known as webhooks. Once the events are received they are processed and placed on a messaging queue.\\ \\
-However certain integrations might not support webhooks. A recommended approach to this problem would be to create a separate event poller, which is independent from the HyperPerform system. The poller can then be used to simulate webhook technology by sending the events to the provided REST URL's. This way the HyperPerform system resources are not wasted on event polling.
+However certain integrations might not support webhooks. A recommended approach to this problem would be to create a separate event poller, which is independent from the HyperPerform system. The poller can then be used to simulate webhook technology by sending the events to the provided REST URL's. Thus the HyperPerform system resources are not wasted on event polling and consistency is kept amongst the event listeners.
 
 \section{Architectural Design}
 \subsection{Architectural Tactics}
