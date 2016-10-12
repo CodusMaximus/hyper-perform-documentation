@@ -94,21 +94,29 @@ $mvn\ clean\ test$ \\\\
 All the necessary dependencies for the project will be automatically downloaded.\\ \textbf{Note:} This process of downloading all the project dependencies might consume large amounts of data and time.
 
 \section{Functional Features to be tested}
-The following features have been tested in the project:
+%The following features have been tested in the project:
+%\begin{itemize}
+%	\item \textbf{GitListener} - Receives events from GitHub.
+%	\item \textbf{GitPushEvent} - A POJO that contains information regarding a GitHub push event.
+%	\item \textbf{TravisListener} - Receives events from Travis CI.
+%	\item \textbf{AccessListener} - Receives events from Entry/Exit.
+%	\item \textbf{TravisEvent} - A POJO that contains information regarding a build triggered by a push event from GitHub
+%	\item \textbf{GitIssueEvent} - A POJO that contains information regarding a GitHub issue that has been created.
+%	\item \textbf{AccessEvent} - A POJO that contains information regarding access in/out of a building containing a card reader.
+%	\item \textbf{User} - A POJO that contains information regarding a user who has been registered to the system.
+%	\item The error codes and exceptions raised when accessing an invalid REST URL.
+%	 
+%\end{itemize}
+
+\subsection{Event Listeners}
+The event listener are a crucial component to the HyperPerform system. Without them gathering information becomes very difficult. Listeners to be tested are:
 \begin{itemize}
-	\item \textbf{GitListener} - Receives events from GitHub.
-	\item \textbf{GitPushEvent} - A POJO that contains information regarding a GitHub push event.
-	\item \textbf{TravisListener} - Receives events from Travis CI.
-	\item \textbf{AccessListener} - Receives events from Entry/Exit.
-	\item \textbf{TravisEvent} - A POJO that contains information regarding a build triggered by a push event from GitHub
-	\item \textbf{GitIssueEvent} - A POJO that contains information regarding a GitHub issue that has been created.
-	\item \textbf{AccessEvent} - A POJO that contains information regarding access in/out of a building containing a card reader.
-	\item \textbf{User} - A POJO that contains information regarding a user who has been registered to the system.
-	\item The error codes and exceptions raised when accessing an invalid REST URL.
-	 
+	\item \textbf{GitListener} - Receives Push and Issue events from GitHub.
+	\item \textbf{TravisListener} - Receives build events from Travis CI.
+	\item \textbf{AccessListener} - Receives access events from Entry/Exit.
 \end{itemize}
 
-Mock JSON data has been passed to the GitListener, TravisListener and AccessListener classes (into the listen functions). \\\\
+Mock JSON data has been passed to the GitListener, TravisListener and AccessListener classes (into the listen functions). These mock events can be found in the Appendix.\\\\
 Each of these components have dependencies on features such as the messaging queue. All of these features are mocked out to ensure each component is tested in isolation. These features were mocked through dependency injection which was provided by Spring. \\
 
 \section{Features that will not be tested}
