@@ -29,16 +29,18 @@
 			\includegraphics[height=200px]{../Images/CodusMaximus_logo.jpg}
 \end{figure}
 
-	
 \author{
 	\textbf{Developers:} \\
 	Rohan Chhipa		\emph{14188377}	\\
 	Claudio Da Silva	\emph{14205892}	\\
 	Jason Gordon		\emph{14405025}	\\
-	Avinash Singh		\emph{14043778}	\\\\
+	Avinash Singh		\emph{14043778}	\\\\	
 }
 
+\subtitle{Client: Schalk Lotz, Magna BC}
+
 \date{\textbf{Updated \today}}
+
 
 \maketitle
 \thispagestyle{empty}
@@ -48,7 +50,8 @@
 \pagebreak
 
 \section{System Overview}
-Many different tools are available for measuring the quality of products made, but very few tools exist which assess the quality of the people making said products. People play a huge role in a project, and trying to monitor each and every one becomes a tedious task which diverts man power away from other more critical tasks. Whether it be for an end of year evaluation, or attempting to assess the current status of a project, generating a report on a staff member can help keep up productivity, as well as get them any help they need in order to resume quality performance. By ensuring that there is constant quality performance from each individual on a project, one can increase project quality as well as reduce project risks such as loss of an important team member during a critical stage of a project's life-cycle. 
+Many different tools are available for measuring the quality of products made, but very few tools exist which assess the quality of the people making said products. People play a huge role in a project, and trying to monitor each and every one becomes a tedious task which diverts man power away from other more critical tasks. Whether it be for an end of year evaluation, or attempting to assess the current status of a project, generating a report on a staff member can help keep up productivity, as well as get them any help they need in order to resume quality performance. By ensuring that there is constant quality performance from each individual on a project, one can increase project quality as well as reduce project risks such as loss of an important team member during a critical stage of a project's life-cycle. \\ \\
+The HyperPerform system has the ability to automatically gather information from multiple integrations such as GitHub and Travis. However due to the highly pluggable nature of the system one could easily add more integrations to pull information from. The HyperPerform system simplifies management by allowing a manager to view all relevant employee data in simple and easy to understand reports, where reports can be a summarised report or a more detailed report on employee activity.
 
 \section{System Configuration}
 This guide has been made for users using a Linux based operating system. To install the HyperPerform system on the machine you will be required to have an active connection to the internet. Please note that high amounts of data might be consumed. 
@@ -63,6 +66,33 @@ WildFly can be downloaded from: \url{wildfly.org} \\ \\
 Please ensure you download WildFly 10. The HyperPerform system was fully tested on this version of WildFly. Any other version might produce unexpected behaviour. \\ \\
 For the front-end Dashboard please ensure you have Nodejs (version 6.4.0 or higher) installed on your machine. Nodejs can be found at \url{https://nodejs.org/en/}.
 
+\subsection{Event Gathering}
+The system gathers information through webhook technology. Thus to be able to receive any events the computer on which the system will be installed \textbf{must} be connected to the internet. When configuring the integrations you will need to provide the URL for that integration to send events to. The following figure shows the GitHub webhook.
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/gitWebhook}
+	\caption{Adding GitHub webhook}
+\end{figure}
+
+An optional feature would be to bind a domain name to the global IP address of the server. However this is merely for readability purposes and work affect system performance in any way.
+
+\subsection{Miscellaneous}
+
+Certain components of the system require user names which are consistent. The Git event processor is one such component. When using GitHub on your local machine please ensure that your local configurable Git name corresponds to your actual GitHub username. \\ \\
+To check your local Git name open terminal or command prompt and run the following command: 
+
+\begin{lstlisting}
+git config user.name
+\end{lstlisting} 
+~\\
+If the name corresponds to your account name then nothing further needs to be done and you can continue to the installation. However if the two names do not match then run the following command:
+
+\begin{lstlisting}
+git config --global user.name "<username>"
+\end{lstlisting}
+~\\
+In the command above the $<$username$>$ is your actual account name.
+
 \section{Installation}
 
 \subsection{Docker Installation}
@@ -73,7 +103,7 @@ Assuming you have docker installed on your machine, simply run the following com
 docker run hyperperform/HyperPerform 
 \end{lstlisting}
 This will download the HyperPerform Docker image from DockerHub and run it on you machine. \\ \\
-The front end component does not have a Docker image at this point in time. To install the front end component please look at section 3.2.5 for the manual installation.
+The front end component does not have a Docker image at this point in time. To install the front end component please refer to section 3.2.5 for the manual installation.
 
 \subsection{Manual Installation}
 This installation guide assumes a Linux Server running Ubuntu 14 or higher:
@@ -154,23 +184,34 @@ listen_addresses = "*"
 \textbf{Create database hyperperform and the tables}\\
 Run the following commands in terminal: 
 \begin{lstlisting}
-   psql -c 'CREATE DATABASE hyperperform;' -U postgres
-  
-   psql -d hyperperform -c 'CREATE TABLE public."GitPush" ( id integer NOT NULL, repository character varying(255), "timestamp" timestamp without time zone, username character varying(255), commitsize integer, CONSTRAINT "GitPush_pkey" PRIMARY KEY (id) ); CREATE SEQUENCE public.hibernate_sequence INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1 CACHE 1;' -U postgres
-  
-   psql -d hyperperform -c 'CREATE TABLE public."TravisEvent" ( id integer NOT NULL, branch character varying(255), commiter character varying(255), repo character varying(255), status character varying(255), "timestamp" timestamp without time zone, CONSTRAINT "TravisEvent_pkey" PRIMARY KEY (id));' -U postgres
-  
-   psql -d hyperperform -c 'CREATE TABLE public."CalendarProject" ( projectid integer NOT NULL, calendarid character varying(255), collaborators bytea, creator character varying(255), duedate timestamp without time zone, eventid character varying(255), reponame character varying(255), "timestamp" timestamp without time zone, CONSTRAINT "CalendarProject_pkey" PRIMARY KEY (projectid));' -U postgres
-  
-   psql -d hyperperform -c 'CREATE TABLE public."CalendarMeeting" ( meetingid integer NOT NULL, calendarid character varying(255), creator character varying(255), duedate timestamp without time zone, eventid character varying(255), location character varying(255), "timestamp" timestamp without time zone, CONSTRAINT "CalendarMeeting_pkey" PRIMARY KEY (meetingid));' -U postgres
-  
-   psql -d hyperperform -c 'CREATE TABLE public."CalendarMeeting_attendees" ( "CalendarMeeting_meetingID" integer NOT NULL, attendees integer, attendees_key character varying(255) NOT NULL, CONSTRAINT "CalendarMeeting_attendees_pkey" PRIMARY KEY ("CalendarMeeting_meetingID", attendees_key), CONSTRAINT fkn4q1pmj9vx3tfsaw9irp9voax FOREIGN KEY ("CalendarMeeting_meetingID") REFERENCES public."CalendarMeeting" (meetingid) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION);' -U postgres
-  
-   psql -d hyperperform -c 'CREATE TABLE public."GitIssue"(id integer NOT NULL, action character varying(255), assignee character varying(255), createdby character varying(255), issueid bigint, repository character varying(255), "timestamp" timestamp without time zone, CONSTRAINT "GitIssue_pkey" PRIMARY KEY (id));' -U postgres
+psql -c 'CREATE DATABASE hyperperform;' -U postgres
+
+psql -d hyperperform -c 'CREATE TABLE public."GitPush" ( id integer NOT NULL, repository character varying(255), "timestamp" timestamp without time zone, username character varying(255), commitsize integer, url character varying(255), message character varying(255), CONSTRAINT "GitPush_pkey" PRIMARY KEY (id) ); CREATE SEQUENCE public.hibernate_sequence INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1 CACHE 1;' -U postgres
+
+psql -d hyperperform -c 'CREATE TABLE public."TravisEvent" ( id integer NOT NULL, branch character varying(255), commiter character varying(255), repo character varying(255), status character varying(255), "timestamp" timestamp without time zone, CONSTRAINT "TravisEvent_pkey" PRIMARY KEY (id));' -U postgres
+
+psql -d hyperperform -c 'CREATE TABLE public."CalendarProject" ( projectid integer NOT NULL, calendarid character varying(255), collaborators bytea, creator character varying(255), duedate timestamp without time zone, eventid character varying(255), reponame character varying(255), "timestamp" timestamp without time zone, CONSTRAINT "CalendarProject_pkey" PRIMARY KEY (projectid));' -U postgres
+
+psql -d hyperperform -c 'CREATE TABLE public."CalendarMeeting" ( meetingid integer NOT NULL, calendarid character varying(255), creator character varying(255), duedate timestamp without time zone, eventid character varying(255), location character varying(255), "timestamp" timestamp without time zone, CONSTRAINT "CalendarMeeting_pkey" PRIMARY KEY (meetingid));' -U postgres
+
+\end{lstlisting}
+\pagebreak
+
+\begin{lstlisting}
+psql -d hyperperform -c 'CREATE TABLE public."CalendarMeeting_attendees" ( "CalendarMeeting_meetingID" integer NOT NULL, attendees integer, attendees_key character varying(255) NOT NULL, CONSTRAINT "CalendarMeeting_attendees_pkey" PRIMARY KEY ("CalendarMeeting_meetingID", attendees_key), CONSTRAINT fkn4q1pmj9vx3tfsaw9irp9voax FOREIGN KEY ("CalendarMeeting_meetingID") REFERENCES public."CalendarMeeting" (meetingid) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION);' -U postgres
+
+psql -d hyperperform -c 'CREATE TABLE public."GitIssue"(id integer NOT NULL, action character varying(255), assignee character varying(255), createdby character varying(255), issueid bigint, repository character varying(255), "timestamp" timestamp without time zone, title character varying(255), url character varying(255), CONSTRAINT "GitIssue_pkey" PRIMARY KEY (id));' -U postgres
+
+psql -d hyperperform -c 'CREATE TABLE public."User" (email character varying(255) NOT NULL, gitusername character varying(255), name character varying(255), "position" integer, profilepicture bytea,  role integer, surname character varying(255), username character varying(255), password character varying(255), CONSTRAINT "User_pkey" PRIMARY KEY (email));' -U postgres
+
+psql -d hyperperform -c 'CREATE TABLE "AccessEvent"(id integer NOT NULL, email character varying(255), day bigint, deviceid character varying(255), employeeid character varying(255), name character varying(255), surname character varying(255), "timestamp" timestamp without time zone, CONSTRAINT "AccessEvent_pkey" PRIMARY KEY (id) );' -U postgres
+
+psql -d hyperperform -c 'CREATE TABLE public."ForecastData"(data character varying(10485760) NOT NULL, CONSTRAINT "ForecastData_pkey" PRIMARY KEY (data));' -U postgres
+
 
 \end{lstlisting}
 
-
+\pagebreak
 \subsubsection{ActiveMQ}
 To setup ActiveMQ on your server: \\
 \begin{itemize}
@@ -179,13 +220,78 @@ To setup ActiveMQ on your server: \\
 	\item Navigate to configurations tab and click on sub-systems
 	\item Scroll down and search for Messaging-ActiveMQ and click on it
 	\item Click on default, select queues/topics
+		\begin{figure}[H]
+		\begin{center}
+			\includegraphics[width=\linewidth]{../Images/defaultqueue}
+			\caption{Subsystems Configuration}
+		\end{center}
+	\end{figure}
 	\item Click add and input the following information:
 		\begin{itemize}
 			\item Name*: hyperperform
 			\item JNDI Names*: java:/jms/queue/hyperperform
 		\end{itemize}
+			\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.4]{../Images/queueconf}
+			\caption{Queue Configuration}
+		\end{center}
+	\end{figure}
+	
 	\item Click save \\
 \end{itemize}
+
+\subsection{Notifications}
+Please Note: These settings are for a Gmail configuration if you are running your own stmp server you need to adjust the information appropriately. 
+To setup Notifications via Email on the server: \\
+\begin{itemize}
+	\item Start up your WildFly application server
+	\item Navigate to WildFly management console on localhost:9990
+	\item Navigate to configurations tab and click on sub-systems
+	\item Scroll down and search for Email and click on it
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[width=0.6\linewidth]{../Images/subsystem}
+			\caption{Subsystem Email}
+		\end{center}
+	\end{figure}
+	\item Click add and input the following information:
+	\begin{itemize}
+		\item Name*: Gmail 
+		\item JNDI: java:/jboss/mail/gmail
+	\end{itemize}
+	\item Click save \\
+	\item There after View the new configuration and Add a new type
+	\begin{itemize}
+		\item Socket-binding: mail-smtp
+		\item Type: smtp
+		\item Username: "Your@gmail account"
+		\item Password: "Gmail password"
+		\item SSL: enable
+	\end{itemize}
+	\item There after reload the server
+	\item After reloading navigate to configurations tab and the Socket Bindings
+		\begin{figure}[H]
+		\begin{center}
+			\includegraphics[width=\linewidth]{../Images/socket}
+			\caption{Socket Bindings}
+		\end{center}
+	\end{figure}
+	\item Click on View and there after under standard-sockets click view
+	\item Navigate to Outbound Remote and edit the mail-smtp socket bindings
+		\begin{itemize}
+		\item Host: smpt.gmail.com
+		\item Port: 465
+	\end{itemize}
+	\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=\linewidth]{../Images/outbound}
+		\caption{Outbound Socket Configuration}
+	\end{center}
+\end{figure}
+	\item Reload server
+\end{itemize}
+
 
 \subsubsection{Deploying to WildFly}
 To deploy the HyperPerform system to the application you will need to build the system using from the source code. 
@@ -238,7 +344,7 @@ The front-end system will auto launch in your default browser in order to view t
 %\begin{lstlisting}
 %npm install hyperperform
 %\end{lstlisting}
-
+\pagebreak
 \section{Getting Started/Using the System}
 Once the front-end Dashboard is served your default browser should automatically open. In the event that it didn't, simply open the browser of your choice and navigate to the following URL: \url{localhost:3000}. \\ \\
 Once the Dashboard loads you will be presented with the following screen:
