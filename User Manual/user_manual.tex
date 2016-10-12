@@ -76,6 +76,23 @@ The system gathers information through webhook technology. Thus to be able to re
 
 An optional feature would be to bind a domain name to the global IP address of the server. However this is merely for readability purposes and work affect system performance in any way.
 
+\subsection{Miscellaneous}
+
+Certain components of the system require user names which are consistent. The Git event processor is one such component. When using GitHub on your local machine please ensure that your local configurable Git name corresponds to your actual GitHub username. \\ \\
+To check your local Git name open terminal or command prompt and run the following command: 
+
+\begin{lstlisting}
+git config user.name
+\end{lstlisting} 
+~\\
+If the name corresponds to your account name then nothing further needs to be done and you can continue to the installation. However if the two names do not match then run the following command:
+
+\begin{lstlisting}
+git config --global user.name "<username>"
+\end{lstlisting}
+~\\
+In the command above the $<$username$>$ is your actual account name.
+
 \section{Installation}
 
 \subsection{Docker Installation}
