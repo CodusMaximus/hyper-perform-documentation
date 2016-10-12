@@ -66,6 +66,16 @@ WildFly can be downloaded from: \url{wildfly.org} \\ \\
 Please ensure you download WildFly 10. The HyperPerform system was fully tested on this version of WildFly. Any other version might produce unexpected behaviour. \\ \\
 For the front-end Dashboard please ensure you have Nodejs (version 6.4.0 or higher) installed on your machine. Nodejs can be found at \url{https://nodejs.org/en/}.
 
+\subsection{Event Gathering}
+The system gathers information through webhook technology. Thus to be able to receive any events the computer on which the system will be installed \textbf{must} be connected to the internet. When configuring the integrations you will need to provide the URL for that integration to send events to. The following figure shows the GitHub webhook.
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{../Images/gitWebhook}
+	\caption{Adding GitHub webhook}
+\end{figure}
+
+An optional feature would be to bind a domain name to the global IP address of the server. However this is merely for readability purposes and work affect system performance in any way.
+
 \section{Installation}
 
 \subsection{Docker Installation}
