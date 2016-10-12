@@ -31,10 +31,10 @@
 	
 \author{
 	\textbf{Developers:} \\
-	Claudio Da Silva	\emph{14205892}	\\
 	Rohan Chhipa		\emph{14188377}	\\
 	Avinash Singh		\emph{14043778}	\\
-	Jason Gordon		\emph{14405025}	\\\\
+	Jason Gordon		\emph{14405025}	\\
+	Claudio Da Silva	\emph{14205892}	\\\\
 }
 
 \date{\textbf{Updated \today}}
@@ -51,50 +51,50 @@
 This document explains implementation of unit tests which were used to test each component in an isolated environment. It also includes an overview of the technologies used as well as instructions on how to execute these tests. \\ 
 
 \section{Purpose}
-The HyperPerform system was made to be able to track employee performance. One of the main goals of the system is to be able to use the system in any industrial or academic field. To ensure this each component of the system is decoupled from every other. All aspects of the system are implemented such that they conform to the given contracts. Unit testing is essential to ensure that these contracts are not violated in anyway and to ensure that the components that expose the services (REST wrapping) are all working properly before the system is deployed.
+Hyper Perform is an automated performance tracking tool, which sources information from many different integrations in order to provide information about various employee's performances levels and how they affect the current project's success level. One of the main goals of the system is for the system to be able to be used commercially or in an academic setting. To ensure that each component of the system is decoupled from every other; all aspects of the system are implemented such that they conform to the given contracts. Unit testing is essential to ensure that these contracts are not violated in any way and to ensure that the components that expose the services (REST wrapping) are all working properly before the system is deployed.
 
 \section{Technologies}
 
-Since the system was primarily coded with Java we used JUnit to carry out the unit tests for each of the components. We also used Spring to allow us to use dependency injection within each test, this allows us to easily inject mocks and test components in an isolated environment. \\
+Since the system is primarily coded in Java we decided to use the \textit{JUnit testing framework} to carry out the unit tests for each of the components. We also used Spring to allow the use of dependency injection within each test, this allows us to easily inject mocks and test components in an isolated environment. \\
 
-Maven was used as the build tool for this system. When building the system from its source code all unit tests are automatically executed by Maven.  \\
+Maven was used as the build tool for this system. When building the system from its source code, all unit tests are automatically executed by Maven.  \\
 
 Another technology which proved useful was a Mock Dispatcher framework which ships with RESTEasy. The mock dispatcher allows one to easily and efficiently test REST API's without having to deploy the component to an application server.
 
 \section{Testing environment}
 \begin{itemize}
-	\item \textbf{Programming Languages:} Java with JavaEE for the back-end server, front-end relies on AngularJS with Bootstrap.
+	\item \textbf{Programming Languages:} Java with JavaEE for the back-end server, front-end relies on AngularJS with Bootstrap, JQuery and Sass.
 	
-	\item \textbf{Testing frameworks: } Unit testing is done using JUnit. This is used in conjunction with Spring, which is used to achieve dependency injection within the unit tests.
+	\item \textbf{Testing frameworks: } Unit testing is done using JUnit. This is combined with Spring, which is used to achieve dependency injection within the unit tests.
 	
 	\item \textbf{Operating System: } The unit tests are not platform specific. The only requirement in terms of operating systems is that Maven must be supported. If Maven is supported then all unit test dependencies will be downloaded and all the tests will be executed automatically.
 	
 	\item \textbf{Internet Browsers: } The front-end system supports the latest versions of 
-	$Google Chrome$ and $Firefox$. There is limited support for other browsers.
+	\textit{Google Chrome} and \textit{Firefox}. There is limited support for other browsers.
 \end{itemize}
 
 \section{Execution of unit tests}	
-The project was developed using Maven as a build tool. Unit tests Thus each unit test can be easily found within the $src/test$ directory of the project. To run the unit tests simply run the following command on terminal: \\
+The project has been developed using Maven as a build tool. Thus each unit test can be easily found within the $src/test$ directory of the project. To run the unit tests simply run the following command in terminal (in the same directory as the pom file): \\
 
 $mvn\ clean\ test$ \\\\
-All the necessary dependencies for the project will be automatically downloaded. \textbf{Note:} This process of downloading all the project dependencies might consume large amounts of data and time.
+All the necessary dependencies for the project will be automatically downloaded.\\ \textbf{Note:} This process of downloading all the project dependencies might consume large amounts of data and time.
 
 \section{Test items}
-At this point in the project the following features have been tested:
+The following features have been tested in the project:
 \begin{itemize}
-	\item GitListener which receives events from GitHub.
-	\item GitPushEvent which is a POJO that contains information regarding a GitHub event.
-	\item CalendarListener which receives events from Google Calendar service.
-	\item CalendarMeeting which is a POJO that contains information of Meetings from Google Calendar.
-	\item CalendarProject which is a POJO that contains information of Projects from Google Calendar. 
-	\item TravisListener which receives events from Travis CI.
-	\item TravisEvent which is a POJO that contains information regarding a build triggered by a push event from GitHub
-	\item AccessEvent which is a POJO that contains information of access in/out of a building containing a card reader.
+	\item \textbf{GitListener} - Receives events from GitHub.
+	\item \textbf{GitPushEvent} - A POJO that contains information regarding a GitHub push event.
+	\item \textbf{TravisListener} - Receives events from Travis CI.
+	\item \textbf{AccessListener} - Receives events from Entry/Exit.
+	\item \textbf{TravisEvent} - A POJO that contains information regarding a build triggered by a push event from GitHub
+	\item \textbf{GitIssueEvent} - A POJO that contains information regarding a GitHub issue that has been created.
+	\item \textbf{AccessEvent} - A POJO that contains information regarding access in/out of a building containing a card reader.
+	\item \textbf{User} - A POJO that contains information regarding a user who has been registered to the system.
 	\item The error codes and exceptions raised when accessing an invalid REST URL.
 	 
 \end{itemize}
 
-Mock JSON data has been passed to the GitListener and CalendarListener classes (into the listen functions). \\\\
+Mock JSON data has been passed to the GitListener, TravisListener and AccessListener classes (into the listen functions). \\\\
 Each of these components have dependencies on features such as the messaging queue. All of these features are mocked out to ensure each component is tested in isolation. These features were mocked through dependency injection which was provided by Spring. \\
 
 \section{Features that will not be tested}
@@ -107,7 +107,7 @@ Features that have been provided by frameworks will not be tested. Operations su
 	
 	\item The second component to be mocked was the messaging queue provided by ActiveMQ. Once again we do not wish to have unnecessary objects in our queue that might affect actual program execution thus the default queue is replaced with a queue that does not retain objects. \\
 	
-	\item When testing the event listeners we can't wait for the event emitting systems to send out an event. So we send mock events to the listeners while testing, these mock events are structured in the same manner as there real-world counterparts.
+	\item When testing the event listeners we can't wait for the event emitting systems to send out an event. So we send mock events to the listeners while testing, these mock events are structured in the same manner as their real-world counterparts.
 \end{itemize}
 
 \section{Sample tests}
@@ -143,42 +143,11 @@ A post request is created and has the mock event as its content. This post reque
 
 \section{Unit Test Report}
 \subsection{Overview}
-All the test of the system has passed and the reason that a test may fail is if the database tables are not created properly as these tables are not created using JPA, since JPA destroys and creates the tables upon the command used for testing $mvn clean test$. We use Travis CI for our builds to ensure that all the build pass.
+All the tests in the system build correctly and pass the test. The only reason that a test may fail is if the database tables have not been created correctly. This may occur due to the fact that these tables are not created using JPA, since JPA destroys and creates the tables upon execution of the command: \textit{mvn clean test}. Travis CI is used on our repository to ensure that the build do pass.
 
 \subsection{Test Cases}
 
-\subsubsection{Test Class 1}
-	\url{https://github.com/HyperPerform/hyper-perform-server/blob/develop/src/test/java/me/hyperperform/event/CalendarPersistenceTest.java}\\\\
- \textbf{CalendarPersistenceTest}
- \begin{itemize}
- 	\item $jpaTest$ - Test if the CalendarMeeting and CalendarProject POJOS persist.
-	\item $QueryTest$ - Test to see if the persisted objects were actually persisted properly and check the data integrity.\\
-\end{itemize}
-Result: \textbf{All Passed}
-
-
-\subsubsection{Test Class 2}
-\url{https://github.com/HyperPerform/hyper-perform-server/blob/develop/src/test/java/me/hyperperform/event/DatabasePopulatorTest.java}\\\\
-\textbf{DatabasePopulatorTest}
-\begin{itemize}
-	\item $databasePopTest$ - This test is to insert mock data for all the tables into the database so that relevant reports can be generated.\\
-\end{itemize}
-Result: \textbf{All Passed}
-
-
-\subsubsection{Test Class 3}
-\url{https://github.com/HyperPerform/hyper-perform-server/blob/develop/src/test/java/me/hyperperform/event/PersistenceTest.java}\\\\
-\textbf{PersistenceTest}
-\begin{itemize}
-	\item $queryTest$ - This creates a GitPush POJO and persists it thereafter query the database and check data integrity.
-	\item $gitIssuePojoTest$ - This creates a GitIssue POJO and persists it.
-	\item $travisPojoTest$ - This creates a TravisEvent POJO and persists it.\\
-
-\end{itemize}
- Result: \textbf{All Passed}
-
-
-\subsubsection{Test Class 4}
+\subsubsection{Test Class 1 - Rest Tests}
 %\url{https://github.com/HyperPerform/hyper-perform-server/blob/develop/src/test/java/me/hyperperform/rest/RestTest.java}\\\\
 %\textbf{RestTest}
 %\begin{itemize}
@@ -224,16 +193,12 @@ Result: \textbf{All Passed}
 \textbf{Test case 7: Access Test}  \\
 \textbf{Objective: } This test checks whether or not the access listener is working. This is tested by sending through a mock event \\
 \textbf{Input: } A mock access event is sent through \\
-\textbf{Outcome: } An HTTP 200 response code is expected. \\
+\textbf{Outcome: } An HTTP 200 response code is expected. 
 
 All these test cases above can be found on the following link: \url{https://github.com/HyperPerform/hyper-perform-server/blob/develop/src/test/java/me/hyperperform/rest/RestTest.java}
 
 
-
-\pagebreak
-
-
-\subsubsection{Test Class 5}
+\subsubsection{Test Class 2 - User Management Tests}
 All mock data can be found in the Appendix.\\
 \textbf{Test case 1: Create User Test} \\
 \textbf{Objective: } This test will create 2 different users with different roles and persist them into the database. \\
@@ -292,7 +257,7 @@ All mock data can be found in the Appendix.\\
 
 All these test cases above can be found on the following link: \url{https://github.com/HyperPerform/hyper-perform-server/blob/develop/src/test/java/me/hyperperform/user/UserTest.java}
 
-\subsubsection{Test Class 6}	
+\subsubsection{Test Class 3 - Entry/Exit Tests}	
 \textbf{Test case 1: Create Access Event Test} \\
 \textbf{Objective: } The purpose of this test is to be a precursor to see if an access event can be created and then persisted to the database. \\
 \textbf{Input: } There is no direct input to the test. \\
@@ -334,7 +299,7 @@ All these test cases above can be found on the following link: \url{https://gith
 All these test cases can be found on the following link:
 \url{https://github.com/HyperPerform/hyper-perform-server/blob/develop/src/test/java/me/hyperperform/event/EntryExitTest.java}
 
-\subsubsection{Test Class 7}	
+\subsubsection{Test Class 4 - Persistence Tests}	
 \textbf{Test case 1: Create Travis Event Test} \\
 \textbf{Objective: } The purpose of this test is to see if a Travis Event can be created, mapped to the POJO and then persisted to the database. \\
 \textbf{Input: } There is no direct input to the test. \\
@@ -436,10 +401,16 @@ All these test cases can be found on the following link:
 	\item Should assert that the expected repository name is equal to that of the one persisted.\\
 \end{enumerate}
 All these test cases can be found on the following link:
-\url{https://github.com/HyperPerform/hyper-perform-server/blob/develop/src/test/java/me/hyperperform/event/PersistenceTest.java}
+\url{https://github.com/HyperPerform/hyper-perform-server/blob/develop/src/test/java/me/hyperperform/event/PersistenceTest.java}\\
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=1.0]{../Images/Build_Status}
+	\caption{Final Build Status}
+\end{figure}
 
 \section{Conclusion}
-All of Test have passed as we made sure of it and since we using Travis CI which is an automated build system so if it fails we work on the issues and make the fixes. The limitations to these tests is that the require the relevant tables to already exist in the Postgres Database as JPA will not create these tables. A work around for this is to write a script or a unit test that will create these tables if they don't exist before the rest of the unit tests are executed.
+All 36 tests that have been run have passed (as shown by Figure 4 above). Additionally this was confirmed by Travis CI which we have used on our repository to make sure that there are no compilation failures or test failures. The limitations to these tests are the fact that they require the relevant tables to already exist in the Postgres database because otherwise JPA will not create these tables and will try use tables that do not already exist, resulting in an error. A work around for this is to write a script or a unit test that will create these tables if they don't exist before the rest of the unit tests are executed.
 
 \newpage
 
