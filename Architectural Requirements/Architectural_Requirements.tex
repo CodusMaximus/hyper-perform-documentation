@@ -79,8 +79,6 @@ Extended release adapters will include:
 \end{itemize}
 Further information will be provided under integrations.
 
-\pagebreak
-
 \section{Overall Software Architecture}
 
 \subsection{Quality Requirements}
@@ -151,8 +149,6 @@ Tests should ensure that all pre and post-conditions as well as class invariants
 	\item The system is eventually to be Dockerised for easy distribution. 
 \end{itemize}
 
-\pagebreak
-
 \subsection{Architectural Constraints}
 The following constraints are non-negotiable and must be met for the system to properly meet client requirements:
 \begin{itemize}
@@ -161,12 +157,10 @@ The following constraints are non-negotiable and must be met for the system to p
 	\item The web interface should run correctly on all Webkit enabled browsers.
 \end{itemize}
 
-\pagebreak
-
 \subsection{Integration and Access Channels}
 In terms of access channels, the project as it stands focuses on two main forms of access:
 \begin{itemize}
-	\item The web-client component, which will make use of REST calls in order to interact with the back end server. The web client is written in AngularJS 1.0, and interacts with the JavaEE server using the Jersey implementation of REST wrapping.
+	\item The web-client component, which will make use of REST calls in order to interact with the back end server. The web client is written in AngularJS 1.0, and interacts with the server using the RESTEasy implementation of JAX-RS REST wrapping. All services are only exposed through REST wrapping. Thus leaving no other access channel to the services.
 \end{itemize}
 With regards to integration, the system has the following adapters on which to map external integrations on to :
 \begin{itemize}
@@ -175,12 +169,10 @@ With regards to integration, the system has the following adapters on which to m
 	\item The CalenderingSystemAdaoter, provides an interface for various calendering systems such as Google Calender, or Outlook calender can map on to.
 	\item The ContinuousIntegrationAdapter, provides an interface on to which various Continuous Integration systems, such as Travis or Jenkins, can map onto.
 	
-	\item Similarly the events that are retrieved will come through the REST wrapping designed specifically for the events. Each integration has its own REST URL to which it sends events. \\\\
+	\item Similarly the events that are retrieved will come through the REST wrapping designed specifically for the events. Each integration has its own REST URL to which it sends events.
 \end{itemize}
-
-Thus since the events come through the REST URL's we don't have to continuously poll these systems. Instead the separate systems send the events when ready. Once the events are received they are processed and placed on a messaging queue.
-
-\pagebreak
+Thus since the events come through the REST URL's we don't have to continuously poll these systems. Instead the separate systems send the events when ready, these are known as webhooks. Once the events are received they are processed and placed on a messaging queue.\\ \\
+However certain integrations might not support webhooks. A recommended approach to this problem would be to create a separate event poller, which is independent from the HyperPerform system. The poller can then be used to simulate webhook technology by sending the events to the provided REST URL's. This way the HyperPerform system resources are not wasted on event polling.
 
 \section{Architectural Design}
 \subsection{Architectural Tactics}
