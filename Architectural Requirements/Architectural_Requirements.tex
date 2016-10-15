@@ -67,11 +67,11 @@
 
 An explanation of some of the adapters follow:
 \begin{itemize}
-	\item The EntrySystemsAdapter, provides an interface on to which various entry systems such as card readers, biometric scanners and the like, can map.
-	\item The VersionControlAdapter, provides an interface on to which various version control systems such as GitHub, BitBucket and GitLab can map.
-	\item The CalenderingSystemAdaoter, provides an interface for various calendering systems such as Google Calender, or Outlook calender can map onto.
-	\item The ContinuousIntegrationAdapter, provides an interface on to which various Continuous Integration systems, such as Travis or Jenkins, can map onto.
-	\item The BugSystemAdapter, which should provide an interface for bug tracking systems such as Waffle.io or Trello to map on to.\\
+	\item The EntrySystemsAdapter, provides an interface which various entry systems such as card readers, biometric scanners and the like, can map onto.
+	\item The VersionControlAdapter, provides an interface which various version control systems such as GitHub, BitBucket and GitLab can map onto.
+	\item The CalenderingSystemAdaoter, provides an interface for various calendering systems such as Google Calender, or Outlook calender to map onto.
+	\item The ContinuousIntegrationAdapter, provides an interface which various Continuous Integration systems, such as Travis or Jenkins, can map onto.
+	\item The BugSystemAdapter, provides an interface for which bug tracking systems such as Waffle.io or Trello can map onto.\\
 \end{itemize}
 Extended release adapters will include:
 \begin{itemize}
@@ -82,44 +82,43 @@ Further information will be provided under integrations.
 \section{Overall Software Architecture}
 
 \subsection{Quality Requirements}
-The following section will focus on the quality requirements of the overall system at it's highest level of granularity, and all the requirements defined are defined for all components of the system.
+The following section will focus on the quality requirements of the overall system at its highest level of granularity, and all the requirements defined are defined for all components of the system.
 
 \subsubsection{Flexibility}
-The most important element of the system is its flexibility. It has been designed in such a way that extra integrations can easily be added. The main focus of the software is to source data from various integrations that change with the current market trends and business environment. Thus the need for additional integrations and replacement of default integrations will arise, allowing for a system fully embracing the concept of Internet of Things.\\
+The most important element of the system is its flexibility. Each component of the system is decoupled from every other component, thus allowing you to change certain components without affecting anything else. The main focus of the software is to source data from various integrations that change with the current market trends and business environment. Thus the need for additional integrations and replacement of default integrations will arise, allowing for a system fully embracing the principles of IOT (Internet of Things).\\ \\
 The system is decoupled in the way that it is not limited to specific architectures, thus it should not be locked down to a specific provider for either the application server or the database.
 
 \subsubsection{Maintainability}
-Another very important part of this system is the maintainability of the system, to the extent that the system should be easy for future contributors to change, maintain and further develop.
+Another very important aspect of the system is the maintainability of the system, to the extent that the system is easy for future contributors to change, maintain and further develop.
 \begin{itemize}
-	\item Future developers should be able to easily understand the system, and modify it as needed.
+	\item Future developers are able to easily understand the system, and modify it as needed provided that the specified contracts are adhered to.
 	\item The technologies chosen for the system can be reasonably expected to be available for a long time as well as remain open source and available. However due to the front-end being completely decoupled from the back-end it would be easy to change the front-end technology without affecting the back-end functionality.
-	\item The system should be able to be maintained without the need to make it unavailable for said maintenance, following the always-up methodology.
+	\item The system can be maintained without having the provided services unavailable for large periods of time.
 \end{itemize}
 
 \subsubsection{Integrability}
-The system should allow for easy future integration requirements by providing access to it's services using public standards. All external systems should have a preprocessor interface on which to communicate and map on to.
+The system allows for easy future integration requirements by providing access to its services using public standards. All external systems should have a preprocessor interface on which to communicate and map on to.
 
 \subsubsection{Scalability}
-The system should theoretically be usable in large industries of thousands of employees. Thus the system should be able to handle the load and grow as needed. To accomplish this we make use of the message bus architecture.
+The system should theoretically be usable in large industries of thousands of employees. Thus the system has been designed to handle the load and grow as needed. To accomplish this we make use of the message bus architecture.
 
 \subsubsection{Reliability}
-The system should be reliable in the fact that many events will be constantly captured, and in the event a system is not able to currently accept an event, that event must not disappear, but must instead remain on a message queue until the system is able to handle it.
+The system is reliable in the fact that many events will be constantly captured. All events will be persisted and used at a later stage thus leading to more accurate calculations.
 
 \subsubsection{Security}
 This is not the main focus of the system however for any system this requirement is important. The following security measures have been put in place:
 \begin{itemize}
 	\item Proper authentication is to be preformed in order to gain access to confidential user information from the database. 
-	\item The messages and the message queue as a whole has been protected from attack from outside systems. The messaging queue is on the server which is protected by SSL encryption.
-	\item Outside components can only gain access through the message channel, and only when authorised to do so.
+	\item Outside components can only gain access through the provided REST endpoints.
 \end{itemize}
 
 \subsubsection{Auditability}
-Logging should occur for:
+Logging occurs for:
 \begin{itemize}
 	\item Events captured into the queue.
 	\item Access to the users personal information.
 \end{itemize}
-Logs should contain at least for all different logs:
+Logs contain at least for all different logs:
 \begin{itemize}
 	\item An id pertaining to user performing the task.
 	\item A description of the activity happening.
@@ -127,34 +126,34 @@ Logs should contain at least for all different logs:
 \end{itemize}
 
 \subsubsection{Usability}
-The system has been created to be intuitive and easy to use, the system should not be difficult for a user to learn or interact with. Some things that have been emphasised are:
+The system has been created to be intuitive and easy to use, the system is not difficult for a user to learn and interact with. Some things that have been emphasised are:
 \begin{itemize}
 	\item Useful and helpful error messages, as well as client side validation as far as possible.
 	\item Labels and hints where possible to guide users.
 \end{itemize}
 
 \subsubsection{Testability}
-The system must be testable through Continuous Integration using:  
+The system is testable through Continuous Integration using:  
 \begin{itemize}
 	\item Automated isolated tests using mocks
 	\item Automated integration tests using the actual realizations 
 \end{itemize}
-Tests should ensure that all pre and post-conditions as well as class invariants are properly met.
+Tests are run ensure that all pre and post-conditions are properly met and that the system is in working order.
 
 \subsubsection{Deployability}
 \begin{itemize}
 	\item The system must be built using only the build tool and scripts.
-	\item The system should be deployable on cross platform environments.
-	\item The system should be easily adaptable to different environments with different databases and message brokers.
-	\item The system is eventually to be Dockerised for easy distribution. 
+	\item The system is be deployable on cross platform environments.
+	\item The system is easily adaptable to different environments with different databases and message brokers.
+	\item The system has been Dockerised, allowing for easy distribution. 
 \end{itemize}
 
 \subsection{Architectural Constraints}
 The following constraints are non-negotiable and must be met for the system to properly meet client requirements:
 \begin{itemize}
-	\item The system should be platform independent, allowing for docker to handle the environment setup.
-	\item All software used in the creation of this project, including frameworks, libraries and application servers should be strictly open source, as well as preferably well supported and long term.
-	\item The web interface should run correctly on all Webkit enabled browsers.
+	\item The system is platform independent, allowing for docker to handle the environment setup.
+	\item All software used in the creation of this project, including frameworks, libraries and application servers must be strictly open source, as well as preferably well supported and long term.
+	\item The web interface runs correctly on all Webkit enabled browsers.
 \end{itemize}
 
 \subsection{Integration and Access Channels}
@@ -164,10 +163,10 @@ In terms of access channels, the project as it stands focuses on two main forms 
 \end{itemize}
 With regards to integration, the system has the following adapters on which to map external integrations on to :
 \begin{itemize}
-	\item The EntrySystemsAdapter, provides an interface on to which various entry systems such as card readers, biometric scanners and the like can map.
-	\item The VersionControlAdapter, provides an interface on to which various version control systems such as GitHub, BitBucket and GitLab can map.
-	\item The CalenderingSystemAdaoter, provides an interface for various calendering systems such as Google Calender, or Outlook calender can map on to.
-	\item The ContinuousIntegrationAdapter, provides an interface on to which various Continuous Integration systems, such as Travis or Jenkins, can map onto.
+	\item The EntrySystemsAdapter, provides an interface which various entry systems such as card readers, biometric scanners, etc. can map onto.
+	\item The VersionControlAdapter, provides an interface which various version control systems such as GitHub, BitBucket and GitLab can map onto.
+	\item The CalenderingSystemAdaoter, provides an interface for various calendering systems such as Google Calender, or Outlook calender can map onto.
+	\item The ContinuousIntegrationAdapter, provides an interface which various Continuous Integration systems, such as Travis or Jenkins, can map onto.
 	
 	\item Similarly the events that are retrieved will come through the REST wrapping designed specifically for the events. Each integration has its own REST URL to which it sends events.
 \end{itemize}
@@ -207,7 +206,6 @@ The key architecture at the system level is the Enterprise Service Bus. In order
 	\item JUnit as a unit testing framework along with Spring.
 	\item RESTEasy implementation of JAX-RS for REST wrapping.
 	\item ActiveMQ Artemis as the message broker for the system.
-	\item Esper for complex event processing (CEP).
 %	\item Scala for functional programming on mathematical algorithms.
 \end{itemize}
 \subsection{Front end}
