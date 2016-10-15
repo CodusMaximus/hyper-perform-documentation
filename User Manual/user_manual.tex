@@ -60,13 +60,14 @@
 
 \section{System Overview}
 Many different tools are available for measuring the quality of products made, but very few tools exist which assess the quality of the people making said products. People play a huge role in a project, and trying to monitor each and every one becomes a tedious task which diverts man power away from other more critical tasks. Whether it be for an end of year evaluation, or attempting to assess the current status of a project, generating a report on a staff member can help keep up productivity, as well as get them any help they need in order to resume quality performance. By ensuring that there is constant quality performance from each individual on a project, one can increase project quality as well as reduce project risks such as loss of an important team member during a critical stage of a project's life-cycle. \\ \\
-The HyperPerform system has the ability to automatically gather information from multiple integrations such as GitHub and Travis. However due to the highly pluggable nature of the system one could easily add more integrations to pull information from. The HyperPerform system simplifies management by allowing a manager to view all relevant employee data in simple and easy to understand reports, where reports can be a summarised report or a more detailed report on employee activity.
+The HyperPerform system has the ability to automatically gather information from multiple integrations such as GitHub and Travis. This alleviates the responsibility of the manager and HR having to manually monitor each employee by filling in time sheets and performance documents. The system aims to simplify management by allowing a manager to view all relevant employee data in a simple and easy to understand manner. This data is represented in the form of a report. These reports can be a summarised report or a more detailed report on an employees' activities. \\
+In order to allow the system to be used in many different environments, we have developed the system to be highly pluggable in nature, so that one could easily increase the number of integrations from which information can be pulled.
 
 \section{System Configuration}
-This guide has been made for users using a Linux based operating system. To install the HyperPerform system on the machine you will be required to have an active connection to the internet. Please note that high amounts of data might be consumed. 
+This guide has been created for users who are using a Linux based operating system. To install the HyperPerform system on the machine you will be required to have an active connection to the internet. Please note that high amounts of data might be consumed during this process. 
 
 \subsection{Docker installation}
-To install system with ease and avoid all configurations you can download Docker. Docker can be found at \url{www.docker.com} where guides are made available for installing docker on a particular operating system. If you intend to use Docker to install the HyperPerform system then please ensure you install Docker on your machine.
+To install the system with ease and to avoid all the system configurations you can download Docker to handle this for you. Docker can be found at \url{www.docker.com} where guides are made available for installing docker on a particular operating system. If you intend to use Docker to install the HyperPerform system then please ensure you install Docker on your machine.
 
 \subsection{Manual Installation}
 The manual installation requires you to download the source code from the GitHub repository. The newest release is highly recommended. To carry out a manual installation please ensure you have Maven and the WildFly application server on your machine. \\ \\
@@ -360,7 +361,7 @@ Once the Dashboard loads you will be presented with the following screen:
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale=0.3]{../Images/Login_Screen.jpg}
+		\includegraphics[scale=0.3]{../Images/Getting_Started/Login_numbered}
 		\caption{Login screen}
 	\end{center}
 \end{figure}
@@ -370,7 +371,7 @@ Once logged in the user will be presented with the following screen:
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale=0.27]{../Images/dashboard.jpg}
+		\includegraphics[scale=0.27]{../Images/Getting_Started/dash_numbered.png}
 		\caption{Dashboard}
 	\end{center}
 \end{figure}
@@ -380,7 +381,7 @@ If you wish to logout then you merely click on the profile icon in the top right
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale=0.7]{../Images/logout}
+		\includegraphics[scale=0.7]{../Images/Getting_Started/logout_numbered}
 		\caption{Dashboard}
 	\end{center}
 \end{figure}

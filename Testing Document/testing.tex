@@ -11,6 +11,11 @@
 
 \setlength{\parindent}{0pt}
 
+\lstset{
+	frame=single,
+	breaklines=true,
+}
+
 \newcommand{\subtitle}[1]{
 	\posttitle{
 		\par\end{center}
@@ -62,12 +67,12 @@
 
 This document explains implementation of unit tests which were used to test each component in an isolated environment. It also includes an overview of the technologies used as well as instructions on how to execute these tests. \\ 
 
-\section{Purpose}
-Hyper Perform is an automated performance tracking tool, which sources information from many different integrations in order to provide information about various employee's performances levels and how they affect the current project's success level. One of the main goals of the system is for the system to be able to be used commercially or in an academic setting. To ensure that each component of the system is decoupled from every other; all aspects of the system are implemented such that they conform to the given contracts. \\ \\
+\subsection{Purpose}
+HyperPerform is an automated performance tracking tool, which sources information from many different integrations in order to provide information about various employee's performances levels and how they affect the current project's success level. One of the main goals of the system is for the system to be able to be used commercially or in an academic setting. To ensure that each component of the system is decoupled from every other; all aspects of the system are implemented such that they conform to the given contracts. \\ \\
 Thorough unit testing allows us to ensure that the each component of the HyperPerform system is working correctly. Unit testing gives us the ability to test the response of the system under different conditions. \\ \\
 All unit tests were written in such a way that the system is fully tested before being deployed, this includes testing all REST endpoints which are exposed, ensuring that the database is set up correctly and accepting objects to be persisted and ensuring that all subsystem contracts are met.
 
-\section{Technologies}
+\subsection{Technologies}
 
 Since the system is primarily coded in Java we decided to use the \textit{JUnit testing framework} to carry out the unit tests for each of the components. We also used Spring to allow the use of dependency injection within each test, this allows us to easily inject mocks and test components in an isolated environment. \\
 
@@ -75,7 +80,7 @@ Maven was used as the build tool for this system. When building the system from 
 
 Another technology which proved useful was a Mock Dispatcher framework which ships with RESTEasy. The mock dispatcher allows one to easily and efficiently test REST API's without having to deploy the component to an application server.
 
-\section{Testing environment}
+\subsection{Testing environment}
 \begin{itemize}
 	\item \textbf{Programming Languages:} Java with JavaEE for the back-end server, front-end relies on AngularJS with Bootstrap, JQuery and Sass.
 	
@@ -87,10 +92,20 @@ Another technology which proved useful was a Mock Dispatcher framework which shi
 	\textit{Google Chrome} and \textit{Firefox}. There is limited support for other browsers.
 \end{itemize}
 
+\subsection{Assumptions}
+\begin{itemize}
+	\item A database system is installed.
+	\item The persistence xml corresponds to the current database installed on the platform.
+	\item All necessary tables have already been created.
+	\item Maven is installed.
+\end{itemize}
+
 \section{Execution of unit tests}	
 The project has been developed using Maven as a build tool. Thus each unit test can be easily found within the $src/test$ directory of the project. To run the unit tests simply run the following command in terminal (in the same directory as the pom file): \\
 
-$mvn\ clean\ test$ \\\\
+\begin{lstlisting}
+mvn clean test
+\end{lstlisting}
 All the necessary dependencies for the project will be automatically downloaded.\\ \textbf{Note:} This process of downloading all the project dependencies might consume large amounts of data and time.
 
 \section{Functional Features to be tested}
@@ -454,7 +469,7 @@ All these test cases can be found on the following link:
 \end{figure}
 
 \section{Conclusion}
-All 36 tests that have been run have passed (as shown by Figure 4 above). Additionally this was confirmed by Travis CI which we have used on our repository to make sure that there are no compilation failures or test failures. The limitations to these tests are the fact that they require the relevant tables to already exist in the Postgres database because otherwise JPA will not create these tables and will try use tables that do not already exist, resulting in an error. A work around for this is to write a script or a unit test that will create these tables if they don't exist before the rest of the unit tests are executed.
+All 36 tests that have been run have passed (as shown by Figure 4 above). Additionally this was confirmed by Travis CI which we have used on our repository to make sure that there are no compilation failures or test failures. The limitations to these tests are the fact that they require the relevant tables to already exist in the Postgres database. JPA has been configured not to create these tables automatically. If this was done it would delete the tables with all the data during testing. A work around for this is to write a script or a unit test that will create these tables if they don't exist before the rest of the unit tests are executed.
 
 \newpage
 
