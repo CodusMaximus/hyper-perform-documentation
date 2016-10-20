@@ -369,8 +369,14 @@ Once the Dashboard loads you will be presented with the following screen:
 		\caption{Login screen}
 	\end{center}
 \end{figure}
-\noindent
-The default username and password is Admin. This is a default login for when the system is installed for the first time. Once managers exist within the database this feature will be disabled for security purposes.
+\begin{enumerate}
+	\item \textbf{Email Address Input:} The input field for the email address with which an employee or manager was registered.
+	\item \textbf{Password Input:} The input field for the password with which an employee was registered or the password that was changed by ``forgot password".
+	\item \textbf{Login Button:} Logs the user into the system, but first validates the input into the above mentioned fields. 
+	\item \textbf{Forgot Password Button:} A button that should be pressed when a user has forgotten their password. This will bring up a window which asks for the users' email address. Once submitted a new password will be sent to you. 
+	
+	The default email for login is \textit{admin@hyperperform.me} and password \textit{1234}.\\ \textbf{Note:} This account should be removed, manually, once another admin is created using this default administrator account. 
+\end{enumerate}
 
 \subsection{Your Dashboard}
 Once logged in the user will be presented with the following screen:
