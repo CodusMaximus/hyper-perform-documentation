@@ -434,10 +434,10 @@ And finally the Sign Out option can be used to log off the system. Once logged o
 
 \pagebreak
 
-\section{Managerial features}
+\subsection{Managerial features}
 A variety of features are only made available to the manager within the organisation.
 
-\subsection{Managerial view}
+\subsubsection{Managerial view}
 When a manager logs into the system, instead of being directed to a dashboard they will be directed to the following view.
 
 \begin{figure}[H]
@@ -447,14 +447,18 @@ When a manager logs into the system, instead of being directed to a dashboard th
 	\end{center}
 \end{figure}
 
-\noindent
-From this screen a manager is able to view all the current employees within the organisation. They can see all the necessary employee data such as name, email, performance score and performance classification. \\ \\ 
-\noindent
-A manager also has the ability to view an employees' dashboard. This can be achieved by simply clicking on the employees' name and the manager will be directed to the corresponding employees' dashboard. \\ \\
-\noindent
-Managers also have the ability to export the table to a PDF or CSV file or even directly print it out. This allows the manager to keep a copy with them at any time and can aid with record keeping by allowing them to print the table at regular intervals.
+\begin{enumerate}
+	\item \textbf{Employee List Table:} 
+	\begin{enumerate}
+		\item This table allows a manager to view all the current employees within the organisation. They can see all the necessary employee data such as name, email, performance score and performance classification.
+		\item A manager also has the ability to view an employees' dashboard. This can be achieved by simply clicking on the employees' name and the manager will be directed to the corresponding employees' dashboard.
+	\end{enumerate}
+	\item \textbf{Filter Employee's:} This search bar allows a manager to filter the results by searching for any value in any field of the table. The resulting table will show the filtered results only. 
+	\item \textbf{Date Picker:} This allows a manager to filter the scores between two dates and times resulting in a change in the table to those scores between that specific period. 
+	\item \textbf{Export To:} Managers also have the ability to export the table to a PDF or CSV file or even directly print it out. This allows the manager to keep a copy with them at any time and can aid with record keeping by allowing them to print the table at regular intervals. \textbf{Note:} After filtering the results (via point 2) only the filtered data will be exported and not the whole table. 
+\end{enumerate}
 
-\subsection{User registration}
+\subsubsection{User registration}
 The responsibility of adding users to the system is given to the manager. When registering a new user the manager must go through a three step registration process.
 
 \begin{figure}[H]
@@ -463,9 +467,12 @@ The responsibility of adding users to the system is given to the manager. When r
 		\caption{Registration step 1}
 	\end{center}
 \end{figure}
-
-\noindent
-In this step the manager needs to enter basic information such as employee firstname, surname and email address. 
+\begin{enumerate}
+	\item \textbf{First Name:} The first name of the user being registered.
+	\item \textbf{Surname:} The surname of the user being registered.
+	\item \textbf{Email Address:} The email address with which the user being registered will login. \textbf{Note:} This must be a valid email address because the users password will be sent to them via email. 
+	\item \textbf{Next Step Button:} Move from step 1 to step 2. Your input will be validated on click of this button. 
+\end{enumerate}
 
 \begin{figure}[H]
 	\begin{center}
@@ -473,9 +480,14 @@ In this step the manager needs to enter basic information such as employee first
 		\caption{Registration step 2}
 	\end{center}
 \end{figure}
-
-\noindent
-This step requires the employees' GitHub username. This is very important when processing that employees' GitHub data. The manager can give the employee a HyperPerform system username and a password.
+\begin{enumerate}
+	\item \textbf{Git Username:} This is the users' exact git username which will be used in collecting information from their GitHub account. 
+	\item \textbf{HyperPerform Username:} A username given to the registered user.
+	\item \textbf{Password:} The password the user will use to login to their dashboard.
+	\item \textbf{Confirm Password:} A confirmation of the password that was typed in the above field, used for security reasons. 
+	\item \textbf{Previous Step Button:} Takes you back to step one where you can edit the information. 
+	\item \textbf{Next Step Button:} Continues to step 3. Your input is validated again on click of this button. 
+\end{enumerate}
 
 \begin{figure}[H]
 	\begin{center}
@@ -483,15 +495,24 @@ This step requires the employees' GitHub username. This is very important when p
 		\caption{Registration step 3}
 	\end{center}
 \end{figure}
+\begin{enumerate}
+	\item \textbf{Role Dropdown:} A list of role types where the role of the user being registered is chosen. Currently existing roles are:
+	\begin{itemize}
+		\item Administrator
+		\item Employee
+	\end{itemize}
+	\item \textbf{Position Dropdown:} A list of positions in the system where the position of the user being registered is chosen. Currently existing positions are:
+	\begin{itemize}
+		\item Web Developer
+		\item Software Developer
+		\item Multimedia
+	\end{itemize}
+	\item \textbf{Submit all steps:} A button that submits all the fields that were input in all 3 steps. This will then send an email to the registered user which includes their login details. so that they can view their individual dashboard.
+\end{enumerate}
 
 \noindent
-In the final step the manager must specify the employees' role and position within the organisation. \\ \\
-\noindent
 Currently existing roles are:
-\begin{itemize}
-	\item Administrator
-	\item Employee \\
-\end{itemize}
+
 \noindent
 Currently existing positions are:
 \begin{itemize}
@@ -502,24 +523,32 @@ Currently existing positions are:
 
 \pagebreak
 
-\subsection{Forecasting}
+\subsubsection{Forecasting}
 The forecasting section allows for an administrator to add forecast values to the system. A forecast value is a prediction made by an administrator with regards to employee performance.
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=\linewidth]{../Images/Getting_Started/forecast}
+		\includegraphics[width=\linewidth]{../Images/Getting_Started/forecast_numbered}
 		\caption{Dashboard errors}
 	\end{center}
 \end{figure}
 
-An administrator can add a forecast for each integration and assign it to a particular employee position. Thus different employee positions may have different forecast values for the same integration. \\
+\begin{enumerate}
+	\item \textbf{Add Integration:} New integrations can also easily be added. Simply click on the + on the navbar to bring up a modal(Figure ?). On this modal a new integration can be added to the system. \textbf{Note:} when adding a new integration, at least one position and forecast value must be added.
+	\item \textbf{Integration Panel: } Each integration is displayed to the administrator in its own panel. Each panel consists of a table which shows each position along with its corresponding forecast value. All the values in the table are editable; this allows for different employee positions to have different forecast values in the same integration. 
+	\item \textbf{Add/Remove Forecast:} 
+	\begin{enumerate}
+		\item If the administrator does not wish to directly modify the table then simply click on `+' button to add a new row to the forecast table.
+		\item If you want to remove a forecast from the table simply click the `-' button and it will remove a single row at a time.
+		\item \textbf{Note:} you will not be able to add more rows in the table than there are positions in the position dropdown. Also you will not be able to remove all rows in a table, there must be at least 1 at all times. 
+	\end{enumerate} 
+	\item \textbf{Panel Toolbox:} This toolbox allows you to do the following:
+	\begin{enumerate}
+		\item Minimise the panel with the $\bigwedge$ button so that you can see the rest of the integrations more clearly.
+		\item Delete the current integration with the `x' button. When this is pressed a confirmation box will be shown to make sure that you want to delete the integration. 
+	\end{enumerate}  
+\end{enumerate}
 
-Each integration is displayed to the administrator on the forecasting page. Each integration is displayed in its own panel. Each panel consists of a table which shows each position along with its corresponding forecast value. \\
-
-The tables can be directly changed. Once all the changes are made simply click on the tables update button to send the changes off to the server. If the administrator does not wish to directly modify the table then simply click on that particular tables + button. This will allow the administrator to add a new row to the table. \\
-
-New integrations can also easily be added. Simply click on the + on the navbar to bring up a modal(Figure ?). On this modal a new integration can be added to the system. \textbf{Note:} when adding a new integration, at least one position and forecast value must be added. 
-
-\section{Errors}
+\subsection{Errors}
 
 The dashboard provides error messages in the event there's an issue.
 
