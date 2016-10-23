@@ -377,7 +377,7 @@ Once the Dashboard loads you will be presented with the following screen:
 	
 	The default email for login is \textit{admin@hyperperform.me} and password \textit{1234}.\\ \textbf{Note:} This account should be removed, manually, once another admin is created using this default administrator account. 
 \end{enumerate}
-
+\pagebreak
 \subsection{Your Dashboard}
 Once logged in the user will be presented with the following screen:
 
@@ -387,8 +387,19 @@ Once logged in the user will be presented with the following screen:
 		\caption{Dashboard}
 	\end{center}
 \end{figure}
-\noindent
-On this screen you are given a summarised view of all the integrations parts of the HyperPerform system. Note the four colour-coded panels on top, each of these panels represents an integration. These panels are click-able and will direct you to a details screen which will be discussed in the next section 5.
+
+\begin{enumerate}
+	\item \textbf{Integration Panels:} Note the four colour-coded panels on top, each of these panels represents an integration. Each of the panels show your cumulative information for your specific integrations during the time period specified (discussed in point 4 below). These panels are click-able and will direct you to a details screen which will be discussed in the next subsection (subsection 4.3). This can also be done via the sidebar under the ``Detailed" dropdown.
+	\item \textbf{Performance Score:} A view of your current performance score along with your performance indicator. The current performance indicators are:
+	\begin{itemize}
+		\item Non-Performer (Score Below 2)
+		\item Standard Performer (Score between 2 - 3)
+		\item Standard-Plus Performer (Score between 3 - 4)
+		\item High Performer (Score between 4 - 5)
+	\end{itemize}
+	\item \textbf{Graph Summary:} A summary graph view of your performance for each colour-coded integration, during the months shown in the bottom of the graph.
+	\item \textbf{Date Range Picker:} The date picker where you can filter your score between two dates and times. This is discussed in the 4.2.1 below. The default time period used for the calculation of your PA Score is three months. 
+\end{enumerate}
 
 \subsubsection{Filtering Your Performance Score}
 \begin{figure}[H]
@@ -397,7 +408,12 @@ On this screen you are given a summarised view of all the integrations parts of 
 		\caption{Date Picker}
 	\end{center}
 \end{figure}
-\noindent
+\begin{enumerate}
+	\item \textbf{Date Display:} A view of the selected dates for the start date and end date. These are directly modifiable by either typing a date of your choosing or using the calendar picker (described below).
+	\item \textbf{Calendar Picker:} When the button is clicked a calendar will be displayed above the modal window, allowing the selection of the date of your choice. 
+	\item \textbf{Time Pick:} This gives you the ability to choose a specific time on the day of the date that has been chosen in the Calendar Picker. 
+	\item \textbf{Load Button:} When this button is clicked it will take the date and time into consideration into the algorithms. Our system will then calculate the PA Score along with the values for each integration and display them to you within this time frame. 
+\end{enumerate}
 
 \subsection{Detailed View}
 \subsubsection{Graph View}
@@ -407,7 +423,11 @@ On this screen you are given a summarised view of all the integrations parts of 
 		\caption{Detailed View Graph}
 	\end{center}
 \end{figure}
-
+\begin{enumerate}
+	\item \textbf{Tabs:} The names for each repository on which their is a webhook for our system (and the current user has contributions). Each of these tabs are clickable. When clicked it will scroll down to that panel on the page so you do not have to search for it yourself. \textbf{Note:} These tabs are not specified for integrations without different repositories (i.e. entry/exit).
+	\item \textbf{Graph Over Time:} A performance chart of the users performance regarding the integration information in the panel. This is shown within the timeframe specified in the date picker. 
+	\item \textbf{Panel Toolbox:} On the left of this toolbox shows information regarding the panel. in the middle it allows you to click to change to the table view of this panel (explained below). The graph view can be toggled back again by clicking the same button. On the right allows you to minimise the panel to make it easier to see the other panels on the page (you may need to double click for this to work).
+\end{enumerate}
 \subsubsection{Table View}
 \begin{figure}[H]
 	\begin{center}
@@ -415,7 +435,12 @@ On this screen you are given a summarised view of all the integrations parts of 
 		\caption{Detailed View Graph}
 	\end{center}
 \end{figure}
-
+\begin{enumerate}
+	\item \textbf{Detailed Table:} A table that shows the details of the panel in the integration being viewed. In this example above, each row in the table shows one push to your git repository (specified in the panel heading).
+	\item \textbf{Table Tools:} On the left you are able to filter out how many results you want to show in the table at a time. On the right, there is a button that, when pressed, will show search bars for each column in the table. This allows the ability to search each column individually to filter out the results required. 
+	\item \textbf{Pagination:} The pagination shows the numbers of different pages in the table where the rest of your data will be shown. 
+\end{enumerate}
+\pagebreak
 \subsection{Signing Out}
 If you wish to logout then you merely click on the profile icon in the top right corner. Once clicked you will be presented with a small menu. 
 
@@ -430,13 +455,10 @@ If you wish to logout then you merely click on the profile icon in the top right
 	\item \textbf{Sign Out Button:}
 		\begin{enumerate}
 			\item For an employee - When this button is pressed it will sign you out of your dashboard and you will be redirected back to the login page (Figure 7).
-			\item For a manager - This button will sign you out of your employees' dashboard and redirect you to the Employee List Page (Figure ?) where you can view other employees' performance.
+			\item For a manager - This button will sign you out of your employees' dashboard and redirect you to the Employee List Page (Figure 13) where you can view other employees' performance.
 		\end{enumerate} 
 \end{enumerate}
-\noindent
-In this menu you have a few options to choose from. The Profile option will direct you to a profile page where you will be able to view and edit your current details. \\ \\
-The second option is a simple settings page where you can customize the dashboard.\\ \\
-And finally the Sign Out option can be used to log off the system. Once logged off you will be returned to the login screen in Figure 1.
+
 
 \pagebreak
 
@@ -565,6 +587,11 @@ The dashboard provides error messages in the event there's an issue.
 	\end{center}
 \end{figure}
 
+\begin{enumerate}
+	\item \textbf{No Data:} These icons in place of the values indicates that the data from the server was unable to be received by our dashboard. The reasons why are shown on the top right of the screen (also discussed below).
+	\item \textbf{Failed to load:} This indicates that the dashboard was unable to load the PA score due to an error. This is most likely that either you are not connected to the internet or that you have input an invalid date or time in the date picker. 
+	\item \textbf{Unable to connect:} This error is due to the fact that you are most likely not connected to the internet or there is an issue on our side. 
+\end{enumerate}
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=\linewidth]{../Images/Getting_Started/Connect_Server_Detailed_numbered}
@@ -572,7 +599,10 @@ The dashboard provides error messages in the event there's an issue.
 	\end{center}
 \end{figure}
 
-If the system is not connected to the internet no data can be requested from the server. In the event this happens the user will be notified using error messages. These error messages appear on the top right corner of the screen. Each error message describes the issue.
+\begin{enumerate}
+	\item \textbf{Server Error:} If the system is not connected to the internet no data can be requested from the server.
+\end{enumerate}
+
 
 \begin{figure}[H]
 	\begin{center}
@@ -581,6 +611,7 @@ If the system is not connected to the internet no data can be requested from the
 	\end{center}
 \end{figure}
 
-If a new integration has been added to the system and no data has been collected from that particular integration then the user will see the error message on the figure above. \\ 
-
+\begin{enumerate}
+	\item \textbf{No Data Found:} If a new integration has been added to the system and no data has been collected from that particular integration, then the user will see this error message.	
+\end{enumerate}
 \end{document}
