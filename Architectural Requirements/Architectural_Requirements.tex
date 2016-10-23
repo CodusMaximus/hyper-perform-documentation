@@ -75,14 +75,15 @@ An explanation of some of the adapters follow:
 \end{itemize}
 Extended release adapters will include:
 \begin{itemize}
-	\item The WearablesAdapter, which should provide an interface for wearable devices such as Fitbits and Samsung Gears can map on to.\\\\ 
+	\item The WearablesAdapter, which should provide an interface for wearable devices such as Fitbits and Samsung Gears can map on to.
+	\item The CommunicationsAdapter, which should provide an interface for communication mediums such as Slack to map onto.\\
 \end{itemize}
 Further information will be provided under integrations.
 
 \section{Overall Software Architecture}
 
 \subsection{Quality Requirements}
-The following section will focus on the quality requirements of the overall system at its highest level of granularity, and all the requirements defined are defined for all components of the system.
+The following section will focus on the quality requirements of the overall system at its highest level of granularity. All the requirements defined, are defined for all components of the system.
 
 \subsubsection{Flexibility}
 The most important element of the system is its flexibility. Each component of the system is decoupled from every other component, thus allowing you to change certain components without affecting anything else. The main focus of the software is to source data from various integrations that change with the current market trends and business environment. Thus the need for additional integrations and replacement of default integrations will arise, allowing for a system fully embracing the principles of IOT (Internet of Things).\\ \\
